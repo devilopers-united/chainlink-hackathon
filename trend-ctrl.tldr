@@ -73,9 +73,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 1336.4594048224685,
-			"y": 1782.7329406389035,
-			"lastActivityTimestamp": 1749410340419,
+			"x": 567.7947152373141,
+			"y": 968.7366442715264,
+			"lastActivityTimestamp": 1749411284247,
 			"meta": {}
 		},
 		{
@@ -1192,9 +1192,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -845.9407192193197,
-			"y": -1136.0227788305415,
-			"z": 0.7746901619716006,
+			"x": -456.7812794836433,
+			"y": 89.49532771801125,
+			"z": 0.6936097372110552,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -3139,7 +3139,9 @@
 		{
 			"editingShapeId": null,
 			"croppingShapeId": null,
-			"selectedShapeIds": [],
+			"selectedShapeIds": [
+				"shape:7WPTjuK2pelI0I3HVqj87"
+			],
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
@@ -5212,45 +5214,6 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 646.9657364063794,
-			"y": 1205.242048090386,
-			"rotation": 0,
-			"isLocked": false,
-			"opacity": 1,
-			"meta": {},
-			"id": "shape:B4tYqX3xwDAWGd1c44MF9",
-			"type": "text",
-			"props": {
-				"color": "black",
-				"size": "m",
-				"w": 641.59375,
-				"font": "draw",
-				"textAlign": "start",
-				"autoSize": true,
-				"scale": 1,
-				"richText": {
-					"type": "doc",
-					"content": [
-						{
-							"type": "paragraph",
-							"attrs": {
-								"dir": "auto"
-							},
-							"content": [
-								{
-									"type": "text",
-									"text": "Representing Space of a website as a NFT(ERC-721)"
-								}
-							]
-						}
-					]
-				}
-			},
-			"parentId": "page:page",
-			"index": "b023KH",
-			"typeName": "shape"
-		},
-		{
 			"x": 1207.7215517808017,
 			"y": 1783.940927906745,
 			"rotation": 0,
@@ -7074,8 +7037,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 650.4891055056388,
-			"y": 1256.7654171896456,
+			"x": 638.1494424502805,
+			"y": 1201.2369334405334,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -7093,6 +7056,24 @@
 				"richText": {
 					"type": "doc",
 					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Representing Space of a website as a NFT(ERC-721)"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							}
+						},
 						{
 							"type": "paragraph",
 							"attrs": {
@@ -7169,7 +7150,13 @@
 							"type": "paragraph",
 							"attrs": {
 								"dir": "auto"
-							}
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Audience Insights (Age range, location, visitiors)"
+								}
+							]
 						},
 						{
 							"type": "paragraph",
@@ -9328,7 +9315,7 @@
 		},
 		{
 			"x": 636,
-			"y": 601.796875,
+			"y": 571.796875,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
