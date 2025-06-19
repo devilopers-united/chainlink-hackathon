@@ -1,13 +1,22 @@
-import SignUpForm from "@/component/SignUpForm";
-import { ClerkProvider } from "@clerk/nextjs";
-import Image from "next/image";
+import { db } from "./db";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-          <SignUpForm />
-      </main>
-    </div>
+    <main>
+      <h1>Neon + Clerk Example</h1>
+      <p>Welcome to the Neon + Clerk example application!</p>
+      {userId ? (
+        <p className="text-green-500">You are logged in as user ID: {userId}</p>
+      ) : (
+        <p className="text-red-500">You are not logged in.</p>
+      )}
+    </main>
   );
 }
