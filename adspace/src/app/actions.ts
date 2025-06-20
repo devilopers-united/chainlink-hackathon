@@ -1,6 +1,7 @@
+// src/app/actions.ts
 "use server";
 
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { User } from "./db/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -9,21 +10,17 @@ export async function createOrUpdateUser() {
   const { userId } = await auth();
   if (!userId) throw new Error("User not found");
 
-  const client = await clerkClient();
-  const user = await client.users.getUser(userId);
-  const externalAccounts = user?.externalAccounts ?? [];
-  const githubId =
-    externalAccounts.find((acc) => acc.provider === "github")?.externalId ??
-    null;
-
   await db
     .insert(User)
     .values({
       user_id: userId,
+      updated_at: new Date(),
     })
     .onConflictDoUpdate({
       target: User.user_id,
-      set: {},
+      set: {
+        updated_at: new Date(),
+      },
     });
 }
 
