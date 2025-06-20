@@ -1,22 +1,16 @@
-import { db } from "./db";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import Header from "@/components/sections/header";
+import Hero from "@/components/sections/hero";
 
-export default async function Home() {
-  const { userId } = await auth();
-  if (!userId) {
-    redirect("/sign-in");
-  }
+export default function Home() {
 
   return (
-    <main>
-      <h1>Neon + Clerk Example</h1>
-      <p>Welcome to the Neon + Clerk example application!</p>
-      {userId ? (
-        <p className="text-green-500">You are logged in as user ID: {userId}</p>
-      ) : (
-        <p className="text-red-500">You are not logged in.</p>
-      )}
-    </main>
+    <>
+      <Header className="sticky top-6 justify-center" />
+      <main className="flex flex-col">
+        <Hero />
+
+        
+      </main>
+    </>
   );
 }
