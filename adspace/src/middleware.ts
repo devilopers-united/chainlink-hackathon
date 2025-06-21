@@ -1,13 +1,19 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)", "/(.*)"]);
+// Add "/" to the public routes
+const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   const { userId } = await auth();
   const url = new URL(request.url);
 
   console.log("Middleware running:", { userId, pathname: url.pathname });
+
+  // Always allow "/" without redirects
+  if (url.pathname === "/") {
+    return NextResponse.next();
+  }
 
   if (userId && isPublicRoute(request)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
