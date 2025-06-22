@@ -8,7 +8,12 @@ export default clerkMiddleware(async (auth, request) => {
   const { userId } = await auth();
   const url = new URL(request.url);
 
-  console.log("Middleware running:", { userId, pathname: url.pathname });
+  // console.log("Middleware running:", { userId, pathname: url.pathname });
+
+  // Always allow "/" without redirects
+  if (url.pathname === "/") {
+    return NextResponse.next();
+  }
 
   // Always allow "/" without redirects
   if (url.pathname === "/") {

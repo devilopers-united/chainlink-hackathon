@@ -90,7 +90,7 @@ export function Hero() {
           initial={{ opacity: 0, x: -200 }}
           animate={{ opacity: 1, x: 0 }}
           // style={{ y: y1 }}
-          transition={{ duration: 1, dealy: 1 }}
+          transition={{ duration: 1, delay: 1 }}
           className='flex flex-nowrap items-center justify-center h-auto sm:h-[500px] select-none mt-20'
         >
         </motion.div>
