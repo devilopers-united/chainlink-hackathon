@@ -30,7 +30,7 @@ export default function RootLayout({
       <WalletProvider>
         <html lang="en">
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen bg-[#121212]`}
             suppressHydrationWarning
           >
             <Header className="sticky top-6 justify-center" />
