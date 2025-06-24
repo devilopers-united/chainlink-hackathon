@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import AdSpaceNFT from "../contract/abi/AdSpaceNFT.json";
+import AdSpaceCard from "./AdSpaceCard";
 
 interface MarketplaceProps {
   provider: ethers.BrowserProvider | null;
@@ -110,44 +111,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {adSpaces.map((space) => (
-          <div
-            key={space.tokenId}
-            className="border border-gray-700 rounded-lg p-4 hover:shadow-xl transition transform hover:-translate-y-1"
-          >
-            {space.image && (
-              <img
-                src={space.image}
-                alt={space.name || `Ad Space ${space.tokenId}`}
-                className="w-full h-48 object-cover rounded-t-lg mb-4"
-              />
-            )}
-            <h3 className="text-xl font-semibold text-black mb-2">
-              {space.name || `Ad Space #${space.tokenId}`}
-            </h3>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {space.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="bg-gray-700 text-white text-sm px-2 py-1 rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <p className="text-black text-sm mb-2">{space.description}</p>
-            <p className="text-gray-800">
-              <strong>Dimensions:</strong> {space.width}x{space.height}px
-            </p>
-            <p className="text-gray-800">
-              <strong>Status:</strong> {space.status}
-            </p>
-            <p className="text-green-400 font-bold mt-2">
-              ${space.hourlyRentalRate} USD/hour
-            </p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded mt-4 w-full hover:bg-blue-700 transition">
-              View Details
-            </button>
-          </div>
+          <AdSpaceCard key={space.tokenId} space={space} />
         ))}
       </div>
     </div>
