@@ -1,4 +1,5 @@
 "use client";
+import AdCard from "@/components/AdCard";
 import Marketplace from "@/components/Marketplace";
 import { useWallet } from "@/context/WalletContext";
 import { Input } from "@heroui/input";
@@ -23,6 +24,7 @@ const page = () => {
           </div>
         </div>
         <Marketplace provider={provider} />
+              <AdCard />
       </div>
     </div>
   );

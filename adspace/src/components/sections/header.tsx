@@ -48,7 +48,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
             )}
           </div>
           <div className=" gap-5 text-base text-white duration-200 transition-all ease-in-out font-normal tracking-tight *:cursor-pointer hidden lg:flex px-4 self-center cursor-pointer *:opacity-65 *:hover:opacity-100">
-            <Link href="/marketplace/market">
+            <Link href="/marketplace">
               <div>Marketplace</div>
             </Link>
             <Link href="/docs">

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import AdSpaceNFT from "../contract/abi/AdSpaceNFT.json";
-import AdSpaceCard from "./AdSpaceCard";
+import AdSpaceCard from "./AdCard";
 
 interface MarketplaceProps {
   provider: ethers.BrowserProvider | null;
