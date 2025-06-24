@@ -28,8 +28,8 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       align === "left"
         ? "text-left"
         : align === "right"
-        ? "text-right"
-        : "text-center";
+          ? "text-right"
+          : "text-center";
 
     const { scrollYProgress } = useScroll({
       target: ref as React.RefObject<HTMLElement>,
@@ -64,8 +64,8 @@ const Section = forwardRef<HTMLElement, SectionProps>(
                     align === "center"
                       ? "mx-auto"
                       : align === "right"
-                      ? "ml-auto"
-                      : ""
+                        ? "ml-auto"
+                        : ""
                   )}
                   style={{ opacity, y }}
                 >
@@ -79,8 +79,8 @@ const Section = forwardRef<HTMLElement, SectionProps>(
                     align === "center"
                       ? "mx-auto"
                       : align === "right"
-                      ? "ml-auto"
-                      : ""
+                        ? "ml-auto"
+                        : ""
                   )}
                   style={{ opacity, y }}
                 >

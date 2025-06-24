@@ -47,16 +47,12 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
               <div className='bg-zinc-400 ml-1 w-[2px] h-[24px] rounded-full transition-all ease-in-out duration-700'></div>
             )}
           </div>
-          <div className=" gap-5 text-base text-zinc-900 duration-200 transition-all ease-in-out font-normal tracking-tight *:cursor-pointer hidden lg:flex px-4 self-center cursor-pointer *:opacity-65    *:hover:opacity-100">
+          <div className=" gap-5 text-base text-white duration-200 transition-all ease-in-out font-normal tracking-tight *:cursor-pointer hidden lg:flex px-4 self-center cursor-pointer *:opacity-65 *:hover:opacity-100">
             <Link href="/marketplace/market">
               <div>Marketplace</div>
             </Link>
             <Link href="/docs">
               <div>Docs</div>
-            </Link>
-
-            <Link href="/contact">
-              <div>Contact</div>
             </Link>
           </div>
 

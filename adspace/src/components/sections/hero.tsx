@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Schibsted_Grotesk } from 'next/font/google';
 import AnimatedText from '../ui/animated-text';
 import { TextReveal } from '../ui/text-reveal';
+import { useRef, useEffect } from 'react';
 
 const schibstedGrotesk = Schibsted_Grotesk({
   subsets: ['latin'],
@@ -14,6 +15,32 @@ const schibstedGrotesk = Schibsted_Grotesk({
 });
 
 export function Hero() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["end end", "end start"]
+  })
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const position = useTransform(scrollYProgress, (pos) => {
+    pos >= 1 ? "relative" : "fixed"
+  })
+
+  useEffect(() => {
+    const updateMousePosition = (ev: MouseEvent) => {
+      if (!targetRef.current) return;
+      const { clientX, clientY } = ev;
+      targetRef.current.style.setProperty("--x", `${clientX}px`);
+      targetRef.current.style.setProperty("--y", `${clientY}px`);
+    };
+
+    window.addEventListener("mousemove", updateMousePosition);
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+    };
+  }, []);
+
   const { scrollY } = useScroll({
     offset: ["start start", "end start"],
   });
@@ -25,7 +52,10 @@ export function Hero() {
 
   return (
     <>
-      <Section id="hero" className="min-h-[100vh] w-full overflow-hidden bg-[#121212] text-[#fdf9f0]">
+      <motion.section
+        style={{ opacity }}
+        ref={targetRef}
+        id="hero" className="min-h-[100vh] pt-54 w-full overflow-hidden bg-[#121212] text-[#fdf9f0]">
         <main className="mx-auto md:pt-0 sm:pt-8 text-center relative px-4">
           <div className="relative">
             <motion.div
@@ -100,8 +130,8 @@ export function Hero() {
 
         </main>
 
-      </Section>
-      <TextReveal children="I am rahul lorem lorem lorem lorem sahani sleek I am rahul lorem lorem lorem lorem sahani sleek  I am rahul lorem lorem lorem lorem sahani sleek v I am rahul lorem lorem lorem lorem sahani sleek  I am rahul lorem lorem lorem lorem sahani sleek I am rahul lorem lorem lorem lorem sahani sleek  " />
+      </motion.section>
+      {/* <TextReveal children="I am rahul lorem lorem lorem lorem sahani sleek I am rahul lorem lorem lorem lorem sahani sleek  I am rahul lorem lorem lorem lorem sahani sleek v I am rahul lorem lorem lorem lorem sahani sleek  I am rahul lorem lorem lorem lorem sahani sleek I am rahul lorem lorem lorem lorem sahani sleek  " /> */}
     </>
   );
 }
