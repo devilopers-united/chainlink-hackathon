@@ -55,7 +55,7 @@ const AdSpaceCard: React.FC<{ space: AdSpace }> = ({ space }) => {
         <strong>Status:</strong> {space.status}
       </p>
       <p className="text-green-400 font-bold mt-2">
-        ${space.hourlyRentalRate} USD/hour
+        ${Number(space.hourlyRentalRate.toString())} USD/hour
       </p>
       <button
         onClick={handleViewDetails}

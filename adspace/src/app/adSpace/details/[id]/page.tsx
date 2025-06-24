@@ -48,8 +48,10 @@ const AdSpaceDetailsPage = () => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
+        const contractAddress = "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02";
+        console.log("Using contract address:", contractAddress);
         const contract = new ethers.Contract(
-          "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02", // Verify this address
+          contractAddress,
           AdSpaceNFT,
           provider
         );
@@ -69,7 +71,7 @@ const AdSpaceDetailsPage = () => {
           Object.keys({ 0: "Available", 1: "Rented", 2: "Paused" })[
             Number(statusValue)
           ] || "Unknown";
-        console.log("Fetched status:", status); // Debug log
+        console.log("Fetched status:", status);
         setSpace({
           tokenId: Number(id),
           owner: spaceData.owner,
@@ -102,9 +104,15 @@ const AdSpaceDetailsPage = () => {
 
   const calculateEthRequired = async (startTime: number, endTime: number) => {
     if (!space) return ethers.parseEther("0.01");
-    const durationInHours = (endTime - startTime) / 3600;
+    const durationInHours = Math.max(
+      1,
+      Math.floor((endTime - startTime) / 3600)
+    ); // Ensure at least 1 hour
+    console.log("Duration in hours:", durationInHours);
+    const hourlyRateInWei = ethers.parseUnits(space.hourlyRentalRate, 18); // Convert hourly rate to wei
     const totalUsdAmount =
-      BigInt(space.hourlyRentalRate) * BigInt(durationInHours) * BigInt(1e18);
+      BigInt(hourlyRateInWei.toString()) * BigInt(durationInHours); // No extra 1e18, already in wei
+    console.log("Total USD amount (wei):", totalUsdAmount.toString());
     const provider = new ethers.BrowserProvider(window.ethereum);
     const contract = new ethers.Contract(
       "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
@@ -112,27 +120,71 @@ const AdSpaceDetailsPage = () => {
       provider
     );
     const ethRequired = await contract.getETHAmountForUSD(totalUsdAmount);
-    return ethRequired + (ethRequired * BigInt(3)) / BigInt(100); // Add 3% platform fee
+    console.log("Raw ETH required:", ethers.formatEther(ethRequired));
+    const ethWithFee = ethRequired + (ethRequired * BigInt(3)) / BigInt(100); // Add 3% platform fee
+    console.log("ETH with fee:", ethers.formatEther(ethWithFee));
+    return ethWithFee > 0 ? ethWithFee : ethers.parseEther("0.01"); // Fallback if too small
   };
+
+  function getEpochTime(date: Date): number {
+    const myEpoch = Math.floor(date.getTime() / 1000);
+    console.log("Epoch time:", myEpoch);
+    return myEpoch;
+  }
 
   const handleRent = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!space) return;
+
     setRentLoading(true);
     setRentError("");
     setRentSuccess("");
+
     try {
+      // Validate form inputs
+      if (
+        !rentForm.startTime ||
+        !rentForm.endTime ||
+        !rentForm.websiteURL ||
+        !rentForm.adMetadataURI
+      ) {
+        throw new Error("All form fields are required.");
+      }
+
+      const startDate = new Date(rentForm.startTime);
+      const endDate = new Date(rentForm.endTime);
+
+      // Validate dates
+      if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+        throw new Error("Invalid date format.");
+      }
+      if (endDate <= startDate) {
+        throw new Error("End time must be after start time.");
+      }
+      if (
+        Math.floor(startDate.getTime() / 1000) < Math.floor(Date.now() / 1000)
+      ) {
+        throw new Error("Start time must be in the future.");
+      }
+
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const startTime = Math.floor(
-        new Date(rentForm.startTime).getTime() / 1000
-      );
-      const endTime = Math.floor(new Date(rentForm.endTime).getTime() / 1000);
+
+      const startTime = getEpochTime(startDate);
+      const endTime = getEpochTime(endDate);
+
       const ethRequired = await calculateEthRequired(startTime, endTime);
+      if (ethRequired <= 0) throw new Error("Invalid ETH amount calculated.");
+
       const contract = new ethers.Contract(
         "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
         AdSpaceNFT,
         signer
+      );
+
+      console.log(
+        "Sending transaction with ETH:",
+        ethers.formatEther(ethRequired)
       );
       const tx = await contract.rentAdSpace(
         space.tokenId,
@@ -151,7 +203,9 @@ const AdSpaceDetailsPage = () => {
         adMetadataURI: "",
       });
     } catch (err: any) {
-      setRentError(`Rent failed: ${err.message}`);
+      setRentError(
+        `Rent failed: ${err.message || err.reason || "Unknown error"}`
+      );
     } finally {
       setRentLoading(false);
     }
@@ -211,7 +265,6 @@ const AdSpaceDetailsPage = () => {
           {space.description || "No description available"}
         </p>
 
-        {/* Temporarily bypass status condition for testing */}
         <div className="mt-4">
           <h3 className="text-lg font-semibold text-black mb-2">
             Rent this Ad Space
