@@ -114,7 +114,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
   }, [provider]);
 
   return (
-    <div className="pb-12">
+    <div className="">
       {error && (
         <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 text-center max-w-2xl mx-auto mb-8">
           <p className="text-red-300">{error}</p>
@@ -122,7 +122,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
       )}
 
       {loading ? (
-        <div>
+        <div className="">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-semibold text-white mb-2">
               Loading Ad Spaces...
@@ -138,7 +138,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-center items-center place-items-center mx-4">
           {adSpaces.map((space) => (
             <AdCard key={space.tokenId} space={space} />
           ))}
@@ -146,7 +146,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
       )}
 
       {!loading && adSpaces.length === 0 && (
-        <div className="text-center py-16">
+        <div className="text-center">
           <div className="bg-gray-800/50 p-8 rounded-2xl inline-block">
             <svg
               xmlns="http://www.w3.org/2000/svg"

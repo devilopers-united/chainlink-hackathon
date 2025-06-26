@@ -32,7 +32,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen bg-[#121212]`}
             suppressHydrationWarning
           >
-            <Header className="sticky top-6 justify-center" />
+            <Header className="sticky top-4 justify-center" />
             <main className="max-w-screen">{children}</main>
           </body>
         </html>

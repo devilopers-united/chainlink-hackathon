@@ -55,7 +55,7 @@ export function Hero() {
       <motion.section
         style={{ opacity }}
         ref={targetRef}
-        id="hero" className="min-h-[100vh] pt-54 w-full overflow-hidden bg-[#121212] text-[#fdf9f0]">
+        id="hero" className="min-h-[100vh] pt-28 w-full overflow-hidden bg-[#121212] text-[#fdf9f0]">
         <main className="mx-auto md:pt-0 sm:pt-8 text-center relative px-4">
           <div className="relative">
             <motion.div

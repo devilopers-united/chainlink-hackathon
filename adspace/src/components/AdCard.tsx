@@ -2,6 +2,8 @@
 import { Button } from "./ui/button";
 import { Bookmark, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { ProgressiveBlur } from "./ui/progressive-blur";
 
 interface AdSpace {
   tokenId: number;
@@ -23,6 +25,8 @@ interface AdSpace {
 const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
   const router = useRouter();
 
+  const [isHover, setIsHover] = useState(false);
+
   if (!space) {
     return null;
   }
@@ -32,7 +36,9 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
   };
 
   return (
-    <div className="group relative w-[280px] h-[430px] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300">
+    <div className="group relative w-[300px] h-[430px] rounded-3xl overflow-hidden shadow-lg transition-all duration-300 border-2 border-zinc-700 cursor-pointer"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}>
       {space.image ? (
         <img
           src={space.image}
@@ -42,6 +48,17 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-700" />
       )}
+
+      <ProgressiveBlur
+        className='pointer-events-none absolute bottom-0 left-0 h-[75%] w-full'
+        blurIntensity={2}
+        animate={isHover ? 'visible' : 'hidden'}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 },
+        }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
+      />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
@@ -86,7 +103,7 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
 
           <Button
             onClick={handleViewDetails}
-            className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-4 shadow-md hover:shadow-orange-500/40 transition-all hover:cursor-pointer"
+            className="bg-white/20 hover:bg-white hover:text-black text-white rounded-xl px-6 font-semibold transition-all hover:cursor-pointer"
           >
             View
           </Button>
