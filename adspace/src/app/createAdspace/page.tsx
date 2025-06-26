@@ -16,12 +16,12 @@ const MintPage = () => {
         {!account && (
           <button
             onClick={connectWallet}
-            className="block mx-auto mb-6 px-6  bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300"
+            className="block mx-auto mb-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300"
           >
             Connect Wallet
           </button>
         )}
-
+       
         <MintAdSpace provider={provider} />
       </div>
     </div>
