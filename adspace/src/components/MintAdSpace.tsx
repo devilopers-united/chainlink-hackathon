@@ -173,103 +173,184 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 p-6">
+    <div className="min-h-screen  p-6">
       <div className="max-w-4xl mx-auto">
-        <p className="text-white mb-6 text-center">
-          Connected Account: {account || "Not connected"}
-        </p>
-        <button
-          onClick={refreshConnection}
-          className="block mx-auto mb-6 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300"
-        >
-          Refresh Connection
-        </button>
-        <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 className="text-xl font-semibold text-white mb-6 text-center">
-            Mint New Ad Space
-          </h3>
-          {error && <p className="text-red-400 text-center mb-4">{error}</p>}
-          {txStatus && (
-            <p className="text-green-400 text-center mb-4">{txStatus}</p>
-          )}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input
-              type="text"
-              value={websiteURL}
-              onChange={(e) => setWebsiteURL(e.target.value)}
-              placeholder="Website URL"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="text"
-              value={spaceType}
-              onChange={(e) => setSpaceType(e.target.value)}
-              placeholder="Space Type"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="text"
-              value={spaceId}
-              onChange={(e) => setSpaceId(e.target.value)}
-              placeholder="Space ID"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="text"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              placeholder="Category"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="number"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-              placeholder="Height (px)"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="number"
-              value={width}
-              onChange={(e) => setWidth(e.target.value)}
-              placeholder="Width (px)"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="number"
-              value={hourlyRentalRate}
-              onChange={(e) => setHourlyRentalRate(e.target.value)}
-              placeholder="Hourly Rental Rate (USD)"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <input
-              type="text"
-              value={tags.join(",")}
-              onChange={(e) => setTags(e.target.value.split(","))}
-              placeholder="Tags (comma-separated)"
-              className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 hover:bg-gray-600"
-            />
-            <div
-              {...getRootProps()}
-              className="w-full p-6 border-2 border-dashed bg-gray-700 text-white rounded-lg text-center cursor-pointer transition-all duration-300 hover:border-blue-500 hover:bg-gray-600"
-            >
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <p className="text-blue-300">Drop the logo here...</p>
-              ) : imageIpfsHash ? (
-                <p className="text-green-400">Logo uploaded</p>
-              ) : (
-                <p className="text-gray-400">
-                  Drag 'n' drop logo or click to select (JPG, PNG, GIF)
-                </p>
+        <div className="flex items-center justify-between mb-8 bg-gray-800/50 backdrop-blur-sm p-4 rounded-xl">
+          <div className="flex items-center space-x-2">
+            <div className="w-[120px] text-xl flex gap-1 items-center justify-start tracking-tight font-semibold cursor-pointer text-white">
+              <div className="w-8 h-8 bg-[#f26522] rounded-sm">
+                <p className="text-white text-sm pl-[4px] pt-[1px]">AD</p>
+              </div>
+
+              {typeof window !== "undefined" && window.scrollY > 100 && (
+                <div className="bg-zinc-400 ml-1 w-[2px] h-[24px] rounded-full transition-all ease-in-out duration-700"></div>
               )}
             </div>
+            <span className="text-white font-medium">
+              Connected:{" "}
+              {account
+                ? `${account.substring(0, 6)}...${account.substring(
+                    account.length - 4
+                  )}`
+                : "Not connected"}
+            </span>
           </div>
           <button
-            onClick={handleMint}
-            className="w-full mt-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300"
+            onClick={refreshConnection}
+            className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg"
           >
-            Mint Ad Space
+            Refresh
+          </button>
+        </div>
+
+        <div className="bg-gray-800/70 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-700">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2">
+              Create New Ad Space
+            </h2>
+            <p className="text-gray-400">
+              Mint your advertising space as an NFT
+            </p>
+          </div>
+
+          {error && (
+            <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-300 text-center">
+              {error}
+            </div>
+          )}
+          {txStatus && (
+            <div className="mb-6 p-4 bg-green-900/50 border border-green-700 rounded-lg text-green-300 text-center">
+              {txStatus}
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Website URL</label>
+              <input
+                type="text"
+                value={websiteURL}
+                onChange={(e) => setWebsiteURL(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Space Type</label>
+              <input
+                type="text"
+                value={spaceType}
+                onChange={(e) => setSpaceType(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Space ID</label>
+              <input
+                type="text"
+                value={spaceId}
+                onChange={(e) => setSpaceId(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Category</label>
+              <input
+                type="text"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Height (px)</label>
+              <input
+                type="number"
+                value={height}
+                onChange={(e) => setHeight(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Width (px)</label>
+              <input
+                type="number"
+                value={width}
+                onChange={(e) => setWidth(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Hourly Rate (USD)</label>
+              <input
+                type="number"
+                value={hourlyRentalRate}
+                onChange={(e) => setHourlyRentalRate(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">
+                Tags (comma separated)
+              </label>
+              <input
+                type="text"
+                value={tags.join(",")}
+                onChange={(e) => setTags(e.target.value.split(","))}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="md:col-span-2 space-y-1">
+              <label className="text-gray-300 text-sm">Ad Space Logo</label>
+              <div
+                {...getRootProps()}
+                className={`w-full p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-all duration-300 ${
+                  isDragActive
+                    ? "border-orange-500 bg-gray-700/50"
+                    : imageIpfsHash
+                    ? "border-green-500 bg-gray-700/30"
+                    : "border-gray-600 bg-gray-700/50 hover:border-orange-400"
+                }`}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p className="text-orange-400">Drop the file here...</p>
+                ) : imageIpfsHash ? (
+                  <div className="space-y-2">
+                    <p className="text-green-400 font-medium">
+                      ✓ Logo Uploaded
+                    </p>
+                    <p className="text-gray-400 text-sm">Click to change</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <p className="text-gray-300">Drag & drop your logo here</p>
+                    <p className="text-gray-500 text-sm">
+                      or click to browse (JPG, PNG, GIF)
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={handleMint}
+            disabled={!account}
+            className={`w-full mt-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 ${
+              account
+                ? "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-orange-500/30"
+                : "bg-gray-600 cursor-not-allowed"
+            }`}
+          >
+            {account ? "Mint Ad Space" : "Connect Wallet to Mint"}
           </button>
         </div>
       </div>

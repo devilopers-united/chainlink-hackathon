@@ -1,62 +1,99 @@
-import React from 'react'
-import { Button } from './ui/button'
-import { ProgressiveBlur } from '@/components/core/progressive-blur';
-import { Bookmark, Star } from 'lucide-react';
+"use client";
+import { Button } from "./ui/button";
+import { Bookmark, Star } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-
-const AdCard = () => {
-    return (
-        <div className='w-fit rounded-4xl cursor-pointer bg-[#121212]'>
-            <div className='relative h-[400px] w-[280px] overflow-hidden rounded-3xl'>
-                <img
-                    src='https://cdn.cosmos.so/c4653e73-d082-42e9-87d2-5377d7e6a7f3?format=jpeg'
-                    alt='Benjamin Spiers - Moonlight 2023'
-                    className='absolute inset-0'
-                />
-                <ProgressiveBlur
-                    className='pointer-events-none absolute bottom-0 left-0 h-[60%] w-full'
-                    blurIntensity={8}
-                />
-                <div className='absolute bottom-0 left-0'>
-                    <div className='flex flex-col items-start gap-0 px-5 py-4'>
-                        <p className='text-2xl font-medium text-white pb-2'>Cal.com</p>
-                        <span className='mb-2 text-base text-zinc-100 tracking-tight leading-none '>A fully customizable scheduling software for individuals, businesses taking calls.</span>
-
-                        <div className='gap-1 flex *:px-2 *:py-0.5 *: *:rounded-sm text-xs '>
-                            <div className='bg-[#2b2b2b]'>Tech</div>
-                            <div className='bg-white text-black'>Position: Header</div>
-                        </div>
-
-                        <div className='w-full flex justify-between items-center px-3'>
-                            <div className='flex flex-col items-center pb-3 w-1/3'>
-                                <div className='flex items-center gap-[1px] font-semibold'><Star size={16} /> 4.8</div>
-                                <div className='text-sm text-zinc-200 text-center'>Rating</div>
-                            </div>
-
-                            <div className='h-6 bg-zinc-200 w-0.5 mb-2 mx-4'></div>
-                            <div className='flex flex-col items-center pb-3 w-1/3'>
-                                <div className='flex items-center gap-[1px] font-semibold'>56K+</div>
-                                <div className='text-sm text-zinc-200 text-center'>Reach</div>
-                            </div>
-
-                            <div className='h-6 bg-zinc-200 w-0.5 mb-2 mx-4'></div>
-                            <div className='flex flex-col items-center pb-3 w-1/3'>
-                                <div className='flex items-center gap-[1px] font-semibold'> $50/m</div>
-                                <div className='text-sm text-zinc-200 text-center'>Rate</div>
-                            </div>
-                        </div>
-
-                        <div className='w-full h-full flex items-center justify-stretch'>
-                            <Button className='bg-white text-black rounded-full min-w-3/4 hover:bg-[#175dfb] hover:text-white'>Monetize</Button>
-                            <div className='py-2 bg-[#2b2b2b] border-1 border-zinc-900 w-full items-center justify-center flex rounded-full ml-1'>
-                                <Bookmark size={20} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+interface AdSpace {
+  tokenId: number;
+  owner: string;
+  websiteURL: string;
+  spaceType: string;
+  spaceId: string;
+  category: string;
+  height: number;
+  width: number;
+  tags: string[];
+  hourlyRentalRate: string;
+  status: string;
+  name?: string;
+  description?: string;
+  image?: string;
 }
 
-export default AdCard
+const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
+  const router = useRouter();
+
+  if (!space) {
+    return null;
+  }
+
+  const handleViewDetails = () => {
+    router.push(`/adSpace/details/${space.tokenId}`);
+  };
+
+  return (
+    <div className="group relative w-[280px] h-[430px] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300">
+      {space.image ? (
+        <img
+          src={space.image}
+          alt={`Ad Space ${space.tokenId}`}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-700" />
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+      <div className="relative h-full flex flex-col justify-end p-6">
+        <h3 className="text-xl font-bold text-white mb-1 line-clamp-1">
+          {space.name || `Ad Space #${space.tokenId}`}
+        </h3>
+
+        {space.description && (
+          <p className="text-gray-300 text-sm mb-3 line-clamp-2">
+            {space.description}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {space.tags.length > 0 ? (
+            space.tags.slice(0, 3).map((tag, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 rounded-full bg-gray-800/80 text-gray-300 text-xs font-medium"
+              >
+                {tag.length > 12 ? `${tag.substring(0, 10)}...` : tag}
+              </span>
+            ))
+          ) : (
+            <span className="px-2 py-1 rounded-full bg-gray-800/80 text-gray-400 text-xs">
+              No tags
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between pt-2 border-t border-gray-700/50">
+          <div className="flex items-center gap-1">
+            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <span className="font-medium text-white">
+              ${parseFloat(space.hourlyRentalRate).toFixed(2)}
+              <span className="text-gray-400 text-xs font-normal ml-1">
+                /hour
+              </span>
+            </span>
+          </div>
+
+          <Button
+            onClick={handleViewDetails}
+            className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-4 shadow-md hover:shadow-orange-500/40 transition-all hover:cursor-pointer"
+          >
+            View
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdCard;

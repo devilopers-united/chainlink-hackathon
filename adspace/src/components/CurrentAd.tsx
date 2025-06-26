@@ -43,7 +43,6 @@ const CurrentAd: React.FC<{
       <p>
         <strong>Metadata URI:</strong> {adUri}
       </p>
-      {/* Add logic to fetch and display ad content from URI if needed */}
     </div>
   );
 };

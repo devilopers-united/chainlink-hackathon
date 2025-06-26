@@ -14,6 +14,7 @@ const WalletContext = createContext<
       account: string | null;
       error: string | null;
       connectWallet: () => Promise<void>;
+      disconnectWallet: () => void;
       refreshConnection: () => Promise<void>;
       setProvider: (provider: ethers.BrowserProvider | null) => void;
       setAccount: (account: string | null) => void;
@@ -35,8 +36,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
           const accounts = await newProvider.send("eth_requestAccounts", []);
           if (accounts.length > 0) {
             setProvider(newProvider);
-            const address = accounts[0];
-            setAccount(address);
+            setAccount(accounts[0]);
           } else {
             console.log("No accounts found, wallet not connected.");
           }
@@ -57,8 +57,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
       const handleAccountsChanged = async (accounts: string[]) => {
         if (accounts.length > 0) {
           if (provider) {
-            const address = accounts[0];
-            setAccount(address);
+            setAccount(accounts[0]);
           }
         } else {
           setAccount(null);
@@ -92,9 +91,12 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         const accounts = await newProvider.listAccounts();
         if (accounts.length > 0) {
           setProvider(newProvider);
-          const address = await accounts[0].getAddress();
+          const address =
+            typeof accounts[0] === "string"
+              ? accounts[0]
+              : await accounts[0].getAddress();
           setAccount(address);
-          console.log("Wallet connected, account:", accounts[0]);
+          console.log("Wallet connected, account:", address);
         } else {
           setError("No accounts found after connection attempt.");
         }
@@ -107,12 +109,22 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const disconnectWallet = () => {
+    setProvider(null);
+    setAccount(null);
+    setError(null);
+    console.log("Wallet disconnected.");
+  };
+
   const refreshConnection = async () => {
-    if (provider) {
-      try {
+    try {
+      if (provider) {
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
-          const address = await accounts[0].getAddress();
+          const address =
+            typeof accounts[0] === "string"
+              ? accounts[0]
+              : await accounts[0].getAddress();
           setAccount(address);
           console.log("Connection refreshed, account:", address);
         } else {
@@ -120,10 +132,10 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
           setProvider(null);
           setError("No accounts found on refresh.");
         }
-      } catch (err) {
-        console.error("Refresh failed:", err);
-        setError("Failed to refresh connection.");
       }
+    } catch (err) {
+      console.error("Refresh failed:", err);
+      setError("Failed to refresh connection.");
     }
   };
 
@@ -134,6 +146,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         account,
         error,
         connectWallet,
+        disconnectWallet,
         refreshConnection,
         setProvider,
         setAccount,
