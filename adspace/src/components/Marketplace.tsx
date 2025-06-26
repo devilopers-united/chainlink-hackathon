@@ -123,15 +123,8 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
 
       {loading ? (
         <div className="">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-2">
-              Loading Ad Spaces...
-            </h2>
-            <p className="text-gray-400">
-              Please wait while we fetch the latest ad spaces
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-center items-center place-items-center mx-4">
             {[...Array(8)].map((_, i) => (
               <SkeletonCard key={i} />
             ))}

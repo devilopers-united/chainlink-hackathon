@@ -19,7 +19,7 @@ export const Skeleton = ({
   return (
     <div
       className={cn(
-        "animate-pulse rounded-md bg-gradient-to-br from-gray-800 to-gray-700",
+        "animate-pulse rounded-md bg-gradient-to-br from-gray-900 to-gray-800",
         className
       )}
       {...props}
@@ -29,7 +29,7 @@ export const Skeleton = ({
 
 export const SkeletonCard = () => {
   return (
-    <div className="w-[280px] h-[430px] rounded-3xl overflow-hidden">
+    <div className="w-[300px] h-[430px] rounded-3xl overflow-hidden mb-4">
       <Skeleton className="h-full w-full">
         <div className="h-full flex flex-col justify-end p-6 space-y-3">
           <div className="h-6 w-3/4 rounded-full bg-gray-700" />

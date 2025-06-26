@@ -1,3 +1,3 @@
-import HelloWorld from "./components/HelloWorld";
+import AdSpaceProvider from "./components/AdSpaceProvider";
 
-export default HelloWorld;
+export default AdSpaceProvider;
