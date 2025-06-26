@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { JsonRpcProvider, Contract } from "ethers";
+import { Contract, ethers } from "ethers";
 
 const ABI = [
     "function getCurrentAd(uint256 tokenId) view returns (string)"
@@ -33,7 +33,7 @@ const AdSpaceProvider = ({ tokenId, contractAddress }: AdSpaceProviderProps) => 
             
             try {
                 // For ethers v6, use JsonRpcProvider directly
-                const provider = new JsonRpcProvider(PROVIDER_URL);
+                const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
                 const contract = new Contract(contractAddress, ABI, provider);
 
                 // Call the contract function
