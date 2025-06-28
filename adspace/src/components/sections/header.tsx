@@ -11,11 +11,11 @@ import { useWallet } from "@/context/WalletContext";
 const Header: React.FC<{ className?: string }> = ({ className }) => {
   const { provider, account, error, connectWallet, disconnectWallet } =
     useWallet();
-  const [navStyles, setNavStyles] = useState("");
+  const [navStyles, setNavStyles] = useState("w-[64vw]");
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
-      setNavStyles(" w-[44vw]");
+      setNavStyles("w-[44vw]");
     } else {
       setNavStyles("w-[64vw]");
     }
@@ -31,47 +31,39 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
       initial={{ opacity: 0, y: -200 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.75, delay: 0.5 }}
-      className={cn(
-        "flex justify-between items-center fixed top-0 left-0 right-0 px-4 py-2 z-50",
-        className
-      )}
+      className={cn("justify-between flex items-center z-50", className)}
     >
       <div
         className={cn(
-          "flex justify-between items-center pl-3 pr-1 rounded-xl bg-[#dddddd77] z-50 transition-all backdrop-blur-xl duration-500 ease-in-out h-[52px]",
+          "justify-between flex pl-3 pr-1 rounded-xl bg-[#dddddd77] z-50 transition-all backdrop-blur-xl duration-500 ease-in-out h-[52px]",
           navStyles
         )}
       >
-        <div className="flex items-center justify-between w-full gap-4">
+        <div className="justify-between flex w-full items-center">
           <Link href="/">
-            <div className="w-[120px] text-xl flex gap-1 items-center justify-start tracking-tight font-semibold cursor-pointer text-white">
+            <div className="w-32 text-xl flex gap-1 items-center justify-start tracking-tight font-semibold cursor-pointer text-white">
               <div className="w-8 h-8 bg-[#f26522] rounded-sm">
-                <p className="text-white text-sm pl-[4px] pt-[1px]">AD</p>
+                <p className="text-white text-sm pl-1 pt-[1px]">AD</p>
               </div>
               <div className="flex items-center justify-center text-white pb-1">
                 Adspace
               </div>
               {typeof window !== "undefined" && window.scrollY > 100 && (
-                <div className="bg-zinc-400 ml-1 w-[2px] h-[24px] rounded-full transition-all ease-in-out duration-700"></div>
+                <div className="bg-zinc-400 mx-1 w-[2px] h-[24px] rounded-full transition-all ease-in-out duration-700"></div>
               )}
             </div>
           </Link>
-
-          <div className="hidden lg:flex items-center gap-5 px-4">
+          <div className="gap-5 text-base text-white duration-200 transition-all ease-in-out font-normal tracking-tight *:cursor-pointer hidden lg:flex px-4 self-center cursor-pointer *:opacity-65 *:hover:opacity-100 mx-auto">
             <Link
               href="/marketplace"
-              className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
+              className="opacity-65 hover:opacity-100"
             >
               Marketplace
             </Link>
-            <Link
-              href="/docs"
-              className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
-            >
+            <Link href="/docs" className="opacity-65 hover:opacity-100">
               Docs
             </Link>
           </div>
-
           <div className="flex items-center gap-2">
             {account && (
               <span className="text-white text-sm bg-black/20 px-2 py-1 rounded">

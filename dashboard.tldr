@@ -82,9 +82,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 1316.0414713396392,
-			"y": 782.6618841697697,
-			"lastActivityTimestamp": 1751005493976,
+			"x": 9.748310480458343,
+			"y": 25.308519817842296,
+			"lastActivityTimestamp": 0,
 			"meta": {}
 		},
 		{
@@ -353,6 +353,36 @@
 			},
 			"parentId": "page:page",
 			"index": "aQjRp",
+			"typeName": "shape"
+		},
+		{
+			"x": 2125.6367774205105,
+			"y": 949.9618178781054,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:Uv7dWPlF0McdmI_ILG9mO",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "s",
+				"w": 8,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "ad0gs",
 			"typeName": "shape"
 		},
 		{
@@ -746,9 +776,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 3.541277340805209,
-			"y": -619.5467839152244,
-			"z": 0.8730032285978097,
+			"x": -9.748310480458343,
+			"y": -25.308519817842296,
+			"z": 0.7183627297807844,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -1070,9 +1100,9 @@
 			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:lPYqYU7rJWudiA_ocKWCE"
+				"shape:Uv7dWPlF0McdmI_ILG9mO"
 			],
-			"hoveredShapeId": "shape:0hvZz5MYmuoOgmzh8DVI5",
+			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -2408,15 +2438,7 @@
 		{
 			"followingUserId": null,
 			"opacityForNextShape": 1,
-			"stylesForNextShape": {
-				"tldraw:geo": "oval",
-				"tldraw:size": "s",
-				"tldraw:fill": "none",
-				"tldraw:color": "black",
-				"tldraw:dash": "draw",
-				"tldraw:horizontalAlign": "middle",
-				"tldraw:textAlign": "start"
-			},
+			"stylesForNextShape": {},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
@@ -2430,8 +2452,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1310.4000244140625,
-				"h": 750.4000244140625
+				"w": 1694,
+				"h": 964
 			},
 			"insets": [
 				false,
@@ -2446,11 +2468,11 @@
 			"isChatting": false,
 			"highlightedUserIds": [],
 			"isFocused": true,
-			"devicePixelRatio": 1.25,
+			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": false,
+			"isHoveringCanvas": null,
 			"openMenus": [],
-			"isChangingStyle": true,
+			"isChangingStyle": false,
 			"isReadonly": false,
 			"meta": {},
 			"duplicateProps": null,

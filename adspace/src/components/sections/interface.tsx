@@ -11,7 +11,7 @@ import { Collaboration } from "./app-demo/collabration";
 const Interface = () => {
   return (
     <Section>
-      <div className="relative z-10 w-full overflow-x-clip">
+      <div className="relative z-10 overflow-x-clip">
         <Collaboration />
         <SamePage />
         <StreamlinedExperience />
