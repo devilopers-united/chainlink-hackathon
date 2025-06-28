@@ -7,6 +7,7 @@ import { Features } from "./app-demo/features";
 import { SamePage } from "./app-demo/same-page";
 import { StreamlinedExperience } from "./app-demo/streamlined-experience";
 import { Collaboration } from "./app-demo/collabration";
+import { MoreFeatures } from "./app-demo/more-features";
 
 const Interface = () => {
   return (

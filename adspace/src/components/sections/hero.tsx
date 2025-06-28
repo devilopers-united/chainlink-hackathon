@@ -48,7 +48,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.5, ease: easeInOutCubic }}
           className={` tracking-tighter font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl ${schibstedGrotesk.className} max-w-3xl mx-auto`}
         >
-          Your data runs the world
+          Your webpages 
+          <br/>
+          runs the world
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -63,7 +65,7 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9, ease: easeInOutCubic }}
         >
-          <InteractiveHoverButton className='text-base sm:text-lg px-6 py-3'>
+          <InteractiveHoverButton className='text-base sm:text-lg px-6 py-1'>
             Explore Marketplace
           </InteractiveHoverButton>
         </motion.div>

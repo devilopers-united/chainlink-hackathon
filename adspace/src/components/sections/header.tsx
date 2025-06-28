@@ -41,7 +41,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
       >
         <div className="justify-between flex w-full items-center">
           <Link href="/">
-            <div className="w-32 text-xl flex gap-1 items-center justify-start tracking-tight font-semibold cursor-pointer text-white">
+            <div className="w-56 text-xl flex gap-1 items-center justify-start tracking-tight font-semibold cursor-pointer text-white">
               <div className="w-8 h-8 bg-[#f26522] rounded-sm">
                 <p className="text-white text-sm pl-1 pt-[1px]">AD</p>
               </div>
@@ -77,7 +77,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center w-56 justify-end gap-2">
             {account && (
               <span className="text-white text-sm bg-black/20 px-2 py-1 rounded">
                 {`${account.substring(0, 6)}...${account.substring(
@@ -87,7 +87,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
             )}
             <Button
               effect="gooeyLeft"
-              className="bg-zinc-900 hover:bg-zinc-900 rounded-lg px-4 h-[44px] flex items-center justify-center gap-1 text-white font-normal tracking-tight"
+              className="bg-zinc-900 hover:bg-white hover:text-black  font-[400] rounded-lg px-4 h-[44px] flex items-center justify-center text-white cursor-pointer tracking-tight"
               onClick={account ? disconnectWallet : connectWallet}
             >
               {account ? "Disconnect" : "Connect Wallet"}

@@ -1,5 +1,4 @@
 // import { BranchIcon } from "@/icons/branch";
-import { stylesWithCssVar } from "@/utils/motion";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 
@@ -22,9 +21,9 @@ const animationOrder = {
 };
 
 export const SamePage = () => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: containerRef,
     offset: ["start end", "end end"],
   });
 
@@ -146,95 +145,103 @@ export const SamePage = () => {
     pos >= 1 ? "relative" : "fixed"
   );
 
-  const avatarOpacity = useTransform(scrollYProgress, (pos) =>
-    pos >= animationOrder.fadeInEnd ? 1 : 0
-  );
-
   return (
-    <section ref={targetRef}>
+    <section ref={containerRef}>
       <div className="relative h-[800vh]">
         <div className="sticky top-1/2 flex origin-center -translate-y-1/2 justify-center">
           <motion.div
-            className="translate-x-centered-offset absolute left-1/2 top-1/2 flex w-[50vw] -translate-y-1/2 scale-[var(--scale)] flex-col items-center justify-center "
-            style={stylesWithCssVar({
-              opacity,
-              "--x": x,
-              "--scale": scale,
-            })}
+            style={{ opacity: newBranchOpacity }} className="text-white text-6xl w-full text-center -top-72 absolute">
+            Explore
+            <div className="text-orange-400">
+              Good of Both!
+            </div>
+          </motion.div>
+          <motion.div
+            className="absolute left-1/2 top-1/2 h-[75vh] max-h-[48vw] translate-x-[calc(-50%_+_var(--x))] -translate-y-1/2 scale-[var(--scale)] "
+            style={{ opacity, "--x": x, "--scale": scale } as any}
           >
-            <img alt="" src="/main-screen.svg" className="h-auto w-full" />
-            <motion.img
-              style={{ opacity: avatarOpacity }}
-              className="absolute left-[13%] top-1/2 h-[1.5vw] w-[1.5vw] translate-y-1/2 rounded-full border border-[#c82] object-cover will-change-transform"
-              src="https://unsplash.com/photos/sibVwORYqs0/download?force=true&w=128&h=128"
+            <img
+              alt=""
+              src="/main-screen.svg"
+              className="h-[75vh] max-h-[48vw] w-auto"
             />
             <motion.span
-              className="mt-3 block text-2xl text-white"
+              className="mt-3 block text-6xl text-center text-white"
               style={{ opacity: newBranchOpacity }}
             >
               {/* <BranchIcon className="mr-3 inline-block h-12 w-12" /> Feature */}
-              branch
+              Publisher
             </motion.span>
           </motion.div>
           <motion.div
-            className="translate-x-centered-offset absolute left-1/2 top-1/2 flex w-[50vw] -translate-y-1/2 scale-[var(--scale)] flex-col items-center justify-center"
-            style={stylesWithCssVar({
-              opacity: loadingScreenOpacity,
-              "--x": loadingScreenX,
-              "--scale": loadingScreenscale,
-            })}
+            className="absolute left-1/2 top-1/2 h-[75vh] max-h-[208vw] -translate-y-1/2  translate-x-[calc(-50%_+_var(--x))] scale-[var(--scale)]"
+            style={
+              {
+                opacity: loadingScreenOpacity,
+                "--x": loadingScreenX,
+                "--scale": loadingScreenscale,
+              } as any
+            }
           >
-            <img alt="" src="/loading-screen.svg" className="h-auto w-full" />
+            <img
+              alt=""
+              src="/loading-screen.svg"
+              className="h-[75vh] max-h-[48vw] w-auto"
+            />
             <motion.div
               style={{ opacity: newBranchOpacity }}
               className="absolute inset-0"
             >
-              <img alt="" src="/main-screen.svg" className="h-auto w-full" />
+              <img
+                alt=""
+                src="/main-screen.svg"
+                className="h-[75vh] max-h-[48vw] w-auto"
+              />
             </motion.div>
             <motion.span
-              className="mt-3 block text-2xl text-white"
+              className="mt-3 block text-6xl text-center text-white"
               style={{ opacity: newBranchOpacity }}
             >
               {/* <BranchIcon className="mr-3 inline-block h-12 w-12" /> Frontend */}
-              FYI's branch
+              Advertiser
             </motion.span>
           </motion.div>
 
           <motion.p
-            className="translate-y-centered-offset absolute top-1/2 left-[calc(50%-60rem)] w-[50rem] pl-16 text-2xl leading-tight text-white"
-            style={stylesWithCssVar({
-              opacity: endTextOpacity,
-              "--y": endTexty,
-            })}
+            className="absolute top-1/2 left-[calc(50%-32rem)] w-[30rem] translate-y-[calc(-50%_+_var(--y))] leading-tight text-white text-4xl"
+            style={{ opacity: endTextOpacity, "--y": endTexty } as any}
           >
-            <span className="text-primary">Built for flow</span>
+            <span className="text-orange-400">Built for flow</span>
             <br />
             Spin up a new branch for any sized project in seconds.
           </motion.p>
         </div>
         <motion.p
-          style={stylesWithCssVar({
-            opacity: paragraph1Opacity,
-            "--y": paragraph1TranslateY,
-            position,
-          })}
-          className="translate-y-centered-offset top-1/2 left-[20px] w-[300px] pl-16 text-2xl leading-tight text-white"
+          style={
+            {
+              opacity: paragraph1Opacity,
+              "--y": paragraph1TranslateY,
+              position,
+            } as any
+          }
+          className="top-1/2 left-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pl-16 text-6xl leading-tight text-white"
         >
           Not only share code,
-          <br />
-          <span className="text-primary">share the context.</span>
+          <span className="text-orange-400"> share the context.</span>
         </motion.p>
         <motion.p
-          style={stylesWithCssVar({
-            opacity: paragraph2Opacity,
-            "--y": paragraph2TranslateY,
-            position,
-          })}
-          className="translate-y-centered-offset top-1/2 right-[20px] w-[300px] pr-16 text-xl leading-tight text-white"
+          style={
+            {
+              opacity: paragraph2Opacity,
+              "--y": paragraph2TranslateY,
+              position,
+            } as any
+          }
+          className="top-1/2 right-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pr-16 text-6xl leading-tight text-white"
         >
           Sometimes it's not about code.
           <br />
-          <span className="text-primary">
+          <span className="text-orange-400">
             Get everybody on the same page. Literally.
           </span>
         </motion.p>

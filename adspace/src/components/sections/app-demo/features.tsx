@@ -78,9 +78,9 @@ export const Features = () => {
                         opacity: text1Opacity,
                         "--y": text1Y,
                     })}
-                    className="translate-y-centered-offset absolute top-1/2 left-0"
+                    className="translate-y-centered-offset absolute text-4xl pr-56 top-1/3 left-0"
                 >
-                    <span className="text-primary">Preconfigured environments</span>
+                    <span className="text-orange-400">Preconfigured environments</span>
                     <br />
                     We detect your environment so you don't need to fiddle with
                     configuration files.
@@ -90,9 +90,9 @@ export const Features = () => {
                         opacity: text2Opacity,
                         "--y": text2Y,
                     })}
-                    className="translate-y-centered-offset absolute top-1/2 left-0"
+                    className="translate-y-centered-offset absolute top-1/3 pr-56 text-4xl left-0"
                 >
-                    <span className="text-primary">Command Pallete</span>
+                    <span className="text-orange-400">Command Pallete</span>
                     <br />
                     Access and complete any action in seconds with the command palette.
                 </motion.p>
@@ -101,9 +101,9 @@ export const Features = () => {
                         opacity: text3Opacity,
                         "--y": text3Y,
                     })}
-                    className="translate-y-centered-offset absolute top-1/2 left-0"
+                    className="translate-y-centered-offset absolute top-1/3 text-4xl pr-56 left-0"
                 >
-                    <span className="text-primary">Devtools</span>
+                    <span className="text-orange-400">Devtools</span>
                     <br />
                     We've bundled useful tools to help you get your work done faster and
                     more efficiently.
