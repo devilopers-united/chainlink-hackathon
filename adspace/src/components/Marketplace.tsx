@@ -100,7 +100,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
                 ),
                 status:
                   Object.keys({ 0: "Available", 1: "Rented", 2: "Paused" })[
-                    Number(space.status.toString()) || 0
+                  Number(space.status.toString()) || 0
                   ] || "Unknown",
                 name: metadata.name,
                 description: metadata.description,
@@ -135,7 +135,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
       {loading ? (
         <div className="">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-center items-center place-items-center mx-4">
-            {[...Array(8)].map((_, i) => (
+            {[...Array(4)].map((_, i) => (
               <SkeletonCard key={i} />
             ))}
           </div>

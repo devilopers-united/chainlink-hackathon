@@ -54,28 +54,28 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
             </div>
           </Link>
 
-          {account && (
-            <div className="hidden lg:flex items-center gap-5 px-4">
-              <Link
-                href="/marketplace"
-                className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
-              >
-                Marketplace
-              </Link>
+          <div className="hidden lg:flex items-center gap-5 px-4">
+            <Link
+              href="/marketplace"
+              className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
+            >
+              Marketplace
+            </Link>
+            {account && (
               <Link
                 href="/dashboard"
                 className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
               >
                 Dashboard
               </Link>
-              <Link
-                href="/docsPage"
-                className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
-              >
-                Docs
-              </Link>
-            </div>
-          )}
+            )}
+            <Link
+              href="/docsPage"
+              className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
+            >
+              Docs
+            </Link>
+          </div>
 
           <div className="flex items-center gap-2">
             {account && (

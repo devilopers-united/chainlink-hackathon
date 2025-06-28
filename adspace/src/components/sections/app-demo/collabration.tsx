@@ -67,7 +67,7 @@ export const Collaboration = () => {
     );
 
     return (
-        <section ref={targetRef} className="relative z-10 mt-[-50vh] h-[300vh]">
+        <section ref={targetRef} className="relative z-10  h-[300vh]">
             <div ref={extendedRef} className="mb-[-120vh] h-[420vh] w-full">
                 <div className="sticky top-[10vh]">
                     <div className="flex justify-center">
