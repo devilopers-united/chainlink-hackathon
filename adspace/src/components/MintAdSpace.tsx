@@ -11,7 +11,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
 }) => {
   const { account, refreshConnection } = useWallet();
   const [websiteURL, setWebsiteURL] = useState("");
-  const [pageURL, setPageURL] = useState(""); // New field
+  const [pageURL, setPageURL] = useState("");
   const [spaceType, setSpaceType] = useState("");
   const [spaceId, setSpaceId] = useState("");
   const [category, setCategory] = useState("");
@@ -135,7 +135,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
     try {
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(
-        "0xd07cE5C636D1095e2753525D1620Df6cB55C951D",
+        "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
         AdSpaceNFT,
         signer
       );

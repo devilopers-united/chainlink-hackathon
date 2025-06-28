@@ -1,20 +1,9 @@
 "use client";
 import { Button } from "./ui/button";
-import { Bookmark, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ProgressiveBlur } from "./ui/progressive-blur";
-import {
-  MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContent,
-  MorphingDialogTitle,
-  MorphingDialogImage,
-  MorphingDialogSubtitle,
-  MorphingDialogClose,
-  MorphingDialogDescription,
-  MorphingDialogContainer,
-} from '@/components/ui/morphing-dialog';
 
 interface AdSpace {
   tokenId: number;
@@ -47,10 +36,12 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
   };
 
   return (
-    <div className="group relative w-[300px] h-[430px] rounded-3xl overflow-hidden shadow-lg 
+    <div
+      className="group relative w-[300px] h-[430px] rounded-3xl overflow-hidden shadow-lg 
       mb-4 transition-all duration-300 border-2 border-zinc-700 cursor-pointer"
       onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}>
+      onMouseLeave={() => setIsHover(false)}
+    >
       {space.image ? (
         <img
           src={space.image}
@@ -62,14 +53,14 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
       )}
 
       <ProgressiveBlur
-        className='pointer-events-none absolute bottom-0 left-0 h-[75%] w-full'
+        className="pointer-events-none absolute bottom-0 left-0 h-[75%] w-full"
         blurIntensity={2}
-        animate={isHover ? 'visible' : 'hidden'}
+        animate={isHover ? "visible" : "hidden"}
         variants={{
           hidden: { opacity: 0 },
           visible: { opacity: 1 },
         }}
-        transition={{ duration: 0.2, ease: 'easeInOut' }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -122,7 +113,6 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
         </div>
       </div>
     </div>
-
   );
 };
 
