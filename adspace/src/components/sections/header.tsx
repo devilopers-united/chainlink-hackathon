@@ -15,7 +15,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
-      setNavStyles("w-[44vw]");
+      setNavStyles(" w-[54vw]");
     } else {
       setNavStyles("w-[64vw]");
     }
@@ -53,17 +53,30 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
               )}
             </div>
           </Link>
-          <div className="gap-5 text-base text-white duration-200 transition-all ease-in-out font-normal tracking-tight *:cursor-pointer hidden lg:flex px-4 self-center cursor-pointer *:opacity-65 *:hover:opacity-100 mx-auto">
-            <Link
-              href="/marketplace"
-              className="opacity-65 hover:opacity-100"
-            >
-              Marketplace
-            </Link>
-            <Link href="/docs" className="opacity-65 hover:opacity-100">
-              Docs
-            </Link>
-          </div>
+
+          {account && (
+            <div className="hidden lg:flex items-center gap-5 px-4">
+              <Link
+                href="/marketplace"
+                className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
+              >
+                Marketplace
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/docsPage"
+                className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
+              >
+                Docs
+              </Link>
+            </div>
+          )}
+
           <div className="flex items-center gap-2">
             {account && (
               <span className="text-white text-sm bg-black/20 px-2 py-1 rounded">

@@ -19,7 +19,7 @@ const CurrentAd: React.FC<{
       }
       try {
         const contract = new ethers.Contract(
-          "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
+          "0xd07cE5C636D1095e2753525D1620Df6cB55C951D",
           AdSpaceNFT,
           provider
         );

@@ -80,12 +80,20 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 0,
+			"y": 0,
+			"lastActivityTimestamp": 0,
+			"meta": {},
 			"id": "pointer:pointer",
+<<<<<<< Updated upstream
 			"typeName": "pointer",
 			"x": 9.748310480458343,
 			"y": 25.308519817842296,
 			"lastActivityTimestamp": 0,
 			"meta": {}
+=======
+			"typeName": "pointer"
+>>>>>>> Stashed changes
 		},
 		{
 			"x": 1914.9850114888095,
@@ -776,9 +784,15 @@
 			"typeName": "shape"
 		},
 		{
+<<<<<<< Updated upstream
 			"x": -9.748310480458343,
 			"y": -25.308519817842296,
 			"z": 0.7183627297807844,
+=======
+			"x": 35.39316840708233,
+			"y": 357.49004527413126,
+			"z": 0.23582023223223422,
+>>>>>>> Stashed changes
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -1099,9 +1113,13 @@
 		{
 			"editingShapeId": null,
 			"croppingShapeId": null,
+<<<<<<< Updated upstream
 			"selectedShapeIds": [
 				"shape:Uv7dWPlF0McdmI_ILG9mO"
 			],
+=======
+			"selectedShapeIds": [],
+>>>>>>> Stashed changes
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
@@ -2452,8 +2470,13 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
+<<<<<<< Updated upstream
 				"w": 1694,
 				"h": 964
+=======
+				"w": 557,
+				"h": 497
+>>>>>>> Stashed changes
 			},
 			"insets": [
 				false,
@@ -2468,7 +2491,11 @@
 			"isChatting": false,
 			"highlightedUserIds": [],
 			"isFocused": true,
+<<<<<<< Updated upstream
 			"devicePixelRatio": 1,
+=======
+			"devicePixelRatio": 2,
+>>>>>>> Stashed changes
 			"isCoarsePointer": false,
 			"isHoveringCanvas": null,
 			"openMenus": [],

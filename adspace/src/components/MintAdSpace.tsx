@@ -11,6 +11,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
 }) => {
   const { account, refreshConnection } = useWallet();
   const [websiteURL, setWebsiteURL] = useState("");
+  const [pageURL, setPageURL] = useState(""); // New field
   const [spaceType, setSpaceType] = useState("");
   const [spaceId, setSpaceId] = useState("");
   const [category, setCategory] = useState("");
@@ -53,7 +54,6 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
           },
         }
       );
-      console.log("Pinata upload response:", res.data);
       return `https://lime-acceptable-dog-270.mypinata.cloud/ipfs/${res.data.IpfsHash}`;
     } catch (error: any) {
       console.error("Error uploading to IPFS:", error);
@@ -74,6 +74,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
       )}`,
       attributes: [
         { trait_type: "Website", value: websiteURL },
+        { trait_type: "Page URL", value: pageURL },
         { trait_type: "Space Type", value: spaceType },
         { trait_type: "Category", value: category },
         { trait_type: "Ad Space ID", value: spaceId },
@@ -81,7 +82,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
         { trait_type: "Width", value: parseInt(width) || 0 },
         {
           trait_type: "Hourly Rate (USD)",
-          value: parseFloat(hourlyRentalRate) || 0,
+          value: parseInt(hourlyRentalRate) || 0,
         },
         { trait_type: "Tags", value: tags.join(", ") },
       ],
@@ -104,7 +105,6 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
           },
         }
       );
-      console.log("Pinata JSON upload response:", res.data);
       return `https://lime-acceptable-dog-270.mypinata.cloud/ipfs/${res.data.IpfsHash}`;
     } catch (error: any) {
       console.error("Error uploading metadata JSON to IPFS:", error);
@@ -117,7 +117,6 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
       const imageUrl = await uploadToIPFS(acceptedFiles[0]);
       if (imageUrl) {
         setImageIpfsHash(imageUrl);
-        console.log("Image uploaded to IPFS, URL:", imageUrl);
       }
     }
   };
@@ -136,7 +135,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
     try {
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(
-        "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
+        "0xd07cE5C636D1095e2753525D1620Df6cB55C951D",
         AdSpaceNFT,
         signer
       );
@@ -144,13 +143,14 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
       if (!tokenURI) throw new Error("Failed to generate token URI");
       const tx = await contract.mintAdSpace(
         websiteURL,
+        pageURL,
         spaceType,
         spaceId,
         category,
         tokenURI,
         BigInt(height || 0),
         BigInt(width || 0),
-        ethers.parseUnits(hourlyRentalRate || "0", 18),
+        BigInt(hourlyRentalRate || 0), // Raw USD integer, no 18 decimals
         tags
       );
       setTxStatus("Transaction sent, waiting for confirmation...");
@@ -158,6 +158,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
       setTxStatus("Ad space minted successfully!");
       setError("");
       setWebsiteURL("");
+      setPageURL("");
       setSpaceType("");
       setSpaceId("");
       setCategory("");
@@ -173,7 +174,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
   };
 
   return (
-    <div className="min-h-screen  p-6">
+    <div className="min-h-screen p-6">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8 bg-gray-800/50 backdrop-blur-sm p-4 rounded-xl">
           <div className="flex items-center space-x-2">
@@ -181,7 +182,6 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
               <div className="w-8 h-8 bg-[#f26522] rounded-sm">
                 <p className="text-white text-sm pl-[4px] pt-[1px]">AD</p>
               </div>
-
               {typeof window !== "undefined" && window.scrollY > 100 && (
                 <div className="bg-zinc-400 ml-1 w-[2px] h-[24px] rounded-full transition-all ease-in-out duration-700"></div>
               )}
@@ -231,6 +231,16 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
                 type="text"
                 value={websiteURL}
                 onChange={(e) => setWebsiteURL(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Page URL</label>
+              <input
+                type="text"
+                value={pageURL}
+                onChange={(e) => setPageURL(e.target.value)}
                 className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
               />
             </div>

@@ -10,13 +10,14 @@ interface AdSpace {
   tokenId: number;
   owner: string;
   websiteURL: string;
+  pageURL: string;
   spaceType: string;
   spaceId: string;
   category: string;
   height: number;
   width: number;
   tags: string[];
-  hourlyRentalRate: string;
+  hourlyRentalRate: string; // No 18 decimals, raw USD integer
   status: string;
   name?: string;
   description?: string;
@@ -73,6 +74,10 @@ const AdSpaceDetails = ({ space }: { space: AdSpace | null }) => {
             <p className="text-white font-medium truncate">
               {space.websiteURL}
             </p>
+          </div>
+          <div className="bg-gray-800/50 p-3 rounded-lg">
+            <p className="text-gray-400 text-sm">Page URL</p>
+            <p className="text-white font-medium truncate">{space.pageURL}</p>
           </div>
           <div className="bg-gray-800/50 p-3 rounded-lg">
             <p className="text-gray-400 text-sm">Category</p>
@@ -330,8 +335,7 @@ const AdSpaceDetailsPage = () => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        const contractAddress = "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02";
-        console.log("Using contract address:", contractAddress);
+        const contractAddress = "0xd07cE5C636D1095e2753525D1620Df6cB55C951D";
         const contract = new ethers.Contract(
           contractAddress,
           AdSpaceNFT,
@@ -348,27 +352,23 @@ const AdSpaceDetailsPage = () => {
             console.warn(`Failed to fetch metadata for token ${id}:`, uriError);
           }
         }
-        const statusValue = spaceData.status.toString();
-        const status =
-          Object.keys({ 0: "Available", 1: "Rented", 2: "Paused" })[
-            Number(statusValue)
-          ] || "Unknown";
-        console.log("Fetched status:", status);
+        const status = await contract.getAdSpaceStatus(Number(id));
         setSpace({
           tokenId: Number(id),
           owner: spaceData.owner,
           websiteURL: spaceData.websiteURL,
+          pageURL: spaceData.pageURL,
           spaceType: spaceData.spaceType,
           spaceId: spaceData.spaceId,
           category: spaceData.category,
           height: Number(spaceData.height.toString()),
           width: Number(spaceData.width.toString()),
           tags: spaceData.tags,
-          hourlyRentalRate: ethers.formatUnits(
-            spaceData.hourlyRentalRate.toString(),
-            18
-          ),
-          status: status,
+          hourlyRentalRate: spaceData.hourlyRentalRate.toString(), // Raw USD integer
+          status:
+            Object.keys({ 0: "Available", 1: "Rented", 2: "Paused" })[
+              Number(status)
+            ] || "Unknown",
           name: metadata.name,
           description: metadata.description,
           image: metadata.image,
@@ -384,34 +384,43 @@ const AdSpaceDetailsPage = () => {
     fetchAdSpaceDetails();
   }, [id]);
 
-  const calculateEthRequired = async (startTime: number, endTime: number) => {
-    if (!space) return ethers.parseEther("0.01");
-    const durationInHours = Math.max(
-      1,
-      Math.floor((endTime - startTime) / 3600)
-    );
-    console.log("Duration in hours:", durationInHours);
-    const hourlyRateInWei = ethers.parseUnits(space.hourlyRentalRate, 18);
-    const totalUsdAmount =
-      BigInt(hourlyRateInWei.toString()) * BigInt(durationInHours);
-    console.log("Total USD amount (wei):", totalUsdAmount.toString());
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const contract = new ethers.Contract(
-      "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
-      AdSpaceNFT,
-      provider
-    );
-    const ethRequired = await contract.getETHAmountForUSD(totalUsdAmount);
-    console.log("Raw ETH required:", ethers.formatEther(ethRequired));
-    const ethWithFee = ethRequired + (ethRequired * BigInt(3)) / BigInt(100);
-    console.log("ETH with fee:", ethers.formatEther(ethWithFee));
-    return ethWithFee > 0 ? ethWithFee : ethers.parseEther("0.01");
-  };
+ const calculateEthRequired = async (startTime: number, endTime: number) => {
+   if (!space) return ethers.parseEther("0.01");
+   const durationInSeconds = Math.max(3600, endTime - startTime); // Minimum 1 hour
+   const hourlyRate = BigInt(space.hourlyRentalRate); // Raw USD integer
+   const totalUsdAmount =
+     ((hourlyRate * BigInt(1e18)) / BigInt(3600)) * BigInt(durationInSeconds); // Scale to 18 decimals
+   console.log("Total USD Amount (18 decimals):", totalUsdAmount.toString());
+   const provider = new ethers.BrowserProvider(window.ethereum);
+   const contract = new ethers.Contract(
+     "0xd07ce5c636d1095e2753525d1620df6cb55c951d",
+     AdSpaceNFT,
+     provider
+   );
+   const usdFee = (totalUsdAmount * BigInt(5)) / BigInt(100); // 5% platform fee
+   const usdToPublisher = totalUsdAmount - usdFee;
+   console.log(
+     "USD to Publisher:",
+     usdToPublisher.toString(),
+     "USD Fee:",
+     usdFee.toString()
+   );
+   const ethFee = await contract.getETHAmountForUSD(usdFee);
+   const ethToPublisher = await contract.getETHAmountForUSD(usdToPublisher);
+   const totalEthRequired = ethFee + ethToPublisher;
+   console.log(
+     "ETH to Publisher:",
+     ethers.formatEther(ethToPublisher),
+     "ETH Fee:",
+     ethers.formatEther(ethFee),
+     "Total ETH Required:",
+     ethers.formatEther(totalEthRequired)
+   );
+   return totalEthRequired > 0 ? totalEthRequired : ethers.parseEther("0.01");
+ };
 
   function getEpochTime(date: Date): number {
-    const myEpoch = Math.floor(date.getTime() / 1000);
-    console.log("Epoch time:", myEpoch);
-    return myEpoch;
+    return Math.floor(date.getTime() / 1000);
   }
 
   const uploadToIPFS = async (file: File): Promise<string | null> => {
@@ -440,14 +449,9 @@ const AdSpaceDetailsPage = () => {
           },
         }
       );
-      console.log("Pinata upload response:", res.data);
       return `https://gateway.pinata.cloud/ipfs/${res.data.IpfsHash}`;
     } catch (error: any) {
       console.error("Error uploading to IPFS:", error);
-      if (error.response) {
-        console.error("Pinata API response:", error.response.data);
-        console.error("Status code:", error.response.status);
-      }
       alert("Failed to upload file to IPFS. Check console for details.");
       return null;
     }
@@ -478,14 +482,9 @@ const AdSpaceDetailsPage = () => {
           },
         }
       );
-      console.log("Pinata JSON upload response:", res.data);
       return `https://gateway.pinata.cloud/ipfs/${res.data.IpfsHash}`;
     } catch (error: any) {
       console.error("Error uploading metadata JSON to IPFS:", error);
-      if (error.response) {
-        console.error("Pinata API response:", error.response.data);
-        console.error("Status code:", error.response.status);
-      }
       alert("Failed to upload metadata to IPFS. Check console for details.");
       return null;
     }
@@ -497,7 +496,6 @@ const AdSpaceDetailsPage = () => {
       const imageUrl = await uploadToIPFS(acceptedFiles[0]);
       if (imageUrl) {
         setImageIpfsHash(imageUrl);
-        console.log("Image uploaded to IPFS, URL:", imageUrl);
       }
     }
   };
@@ -535,9 +533,7 @@ const AdSpaceDetailsPage = () => {
       if (endDate <= startDate) {
         throw new Error("End time must be after start time.");
       }
-      if (
-        Math.floor(startDate.getTime() / 1000) < Math.floor(Date.now() / 1000)
-      ) {
+      if (getEpochTime(startDate) < Math.floor(Date.now() / 1000)) {
         throw new Error("Start time must be in the future.");
       }
 
@@ -557,15 +553,11 @@ const AdSpaceDetailsPage = () => {
       if (!adMetadataURI) throw new Error("Metadata upload failed.");
 
       const contract = new ethers.Contract(
-        "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
+        "0xd07cE5C636D1095e2753525D1620Df6cB55C951D",
         AdSpaceNFT,
         signer
       );
 
-      console.log(
-        "Sending transaction with ETH:",
-        ethers.formatEther(ethRequired)
-      );
       const tx = await contract.rentAdSpace(
         space.tokenId,
         startTime,
@@ -592,9 +584,10 @@ const AdSpaceDetailsPage = () => {
       setRentLoading(false);
     }
   };
+
   if (loading)
     return (
-      <div className="min-h-screen  flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-400">Loading ad space details...</p>
@@ -604,7 +597,7 @@ const AdSpaceDetailsPage = () => {
 
   if (error)
     return (
-      <div className="min-h-screen  flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="bg-gray-800/70 p-8 rounded-2xl max-w-md text-center">
           <div className="text-red-400 mb-4">
             <svg
@@ -639,8 +632,8 @@ const AdSpaceDetailsPage = () => {
 
   if (!space)
     return (
-      <div className="min-h-screen  flex items-center justify-center">
-        <div className=" p-8 rounded-2xl max-w-md text-center">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="p-8 rounded-2xl max-w-md text-center">
           <div className="text-gray-400 mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -674,7 +667,7 @@ const AdSpaceDetailsPage = () => {
     );
 
   return (
-    <div className="min-h-screen  p-6">
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <button

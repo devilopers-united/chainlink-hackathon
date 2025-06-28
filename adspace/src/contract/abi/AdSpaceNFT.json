@@ -291,6 +291,7 @@
     "outputs": [
       { "internalType": "address", "name": "owner", "type": "address" },
       { "internalType": "string", "name": "websiteURL", "type": "string" },
+      { "internalType": "string", "name": "pageURL", "type": "string" },
       { "internalType": "string", "name": "spaceType", "type": "string" },
       { "internalType": "string", "name": "spaceId", "type": "string" },
       { "internalType": "string", "name": "category", "type": "string" },
@@ -302,7 +303,7 @@
         "type": "uint256"
       },
       {
-        "internalType": "enum AdSpaceNFT.AdSpaceStatus",
+        "internalType": "enum PiqselNFT.AdSpaceStatus",
         "name": "status",
         "type": "uint8"
       }
@@ -339,6 +340,7 @@
         "components": [
           { "internalType": "address", "name": "owner", "type": "address" },
           { "internalType": "string", "name": "websiteURL", "type": "string" },
+          { "internalType": "string", "name": "pageURL", "type": "string" },
           { "internalType": "string", "name": "spaceType", "type": "string" },
           { "internalType": "string", "name": "spaceId", "type": "string" },
           { "internalType": "string", "name": "category", "type": "string" },
@@ -351,12 +353,12 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum AdSpaceNFT.AdSpaceStatus",
+            "internalType": "enum PiqselNFT.AdSpaceStatus",
             "name": "status",
             "type": "uint8"
           }
         ],
-        "internalType": "struct AdSpaceNFT.SpaceDetails",
+        "internalType": "struct PiqselNFT.SpaceDetails",
         "name": "",
         "type": "tuple"
       }
@@ -371,7 +373,7 @@
     "name": "getAdSpaceStatus",
     "outputs": [
       {
-        "internalType": "enum AdSpaceNFT.AdSpaceStatus",
+        "internalType": "enum PiqselNFT.AdSpaceStatus",
         "name": "",
         "type": "uint8"
       }
@@ -397,7 +399,7 @@
             "type": "string"
           }
         ],
-        "internalType": "struct AdSpaceNFT.RentalInfo[]",
+        "internalType": "struct PiqselNFT.RentalInfo[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -441,9 +443,16 @@
       { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
     "name": "getTimeRemaining",
-    "outputs": [
-      { "internalType": "uint256", "name": "hoursRemaining", "type": "uint256" }
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
+    "name": "getTimeRemainingInHoursWith18Decimals",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -460,6 +469,7 @@
   {
     "inputs": [
       { "internalType": "string", "name": "websiteURL", "type": "string" },
+      { "internalType": "string", "name": "pageURL", "type": "string" },
       { "internalType": "string", "name": "spaceType", "type": "string" },
       { "internalType": "string", "name": "spaceId", "type": "string" },
       { "internalType": "string", "name": "category", "type": "string" },
@@ -585,7 +595,7 @@
     "inputs": [
       { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
       {
-        "internalType": "enum AdSpaceNFT.AdSpaceStatus",
+        "internalType": "enum PiqselNFT.AdSpaceStatus",
         "name": "_status",
         "type": "uint8"
       }

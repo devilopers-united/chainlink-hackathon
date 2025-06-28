@@ -43,11 +43,22 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
       setLoading(true);
       try {
         const contract = new ethers.Contract(
-          "0x44db140EB12D0d9545CE7BfCcc5daAf328C81A02",
+          "0xd07cE5C636D1095e2753525D1620Df6cB55C951D",
           AdSpaceNFT,
           provider
         );
-        const nextTokenId = await contract.nextTokenId();
+        let nextTokenId;
+        try {
+          nextTokenId = await contract.nextTokenId(); // Attempt to call the getter
+          nextTokenId = Number(nextTokenId.toString());
+        } catch (nextTokenIdError) {
+          console.error("nextTokenId failed:", nextTokenIdError);
+          // Fallback: Use a reasonable limit or totalSupply if available
+          nextTokenId = 10; // Adjust based on expected max tokens
+          setError(
+            "Falling back to default token count due to nextTokenId error."
+          );
+        }
         const spaces: AdSpace[] = [];
 
         for (let i = 0; i < nextTokenId; i++) {
@@ -123,7 +134,6 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
 
       {loading ? (
         <div className="">
-          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-center items-center place-items-center mx-4">
             {[...Array(8)].map((_, i) => (
               <SkeletonCard key={i} />

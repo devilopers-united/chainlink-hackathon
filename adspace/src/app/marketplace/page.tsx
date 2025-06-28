@@ -6,9 +6,20 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import { useWallet } from "@/context/WalletContext";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const MarketplacePage = () => {
-  const { provider } = useWallet();
+  const { provider, account } = useWallet();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!account) {
+      router.push("/");
+    }
+  }, [account, router]);
+
+  if (!account) return null;
 
   return (
     <div className="min-h-screen">
@@ -16,9 +27,7 @@ const MarketplacePage = () => {
         <div>
           <div className="px-8 flex w-full justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-white">
-                Marketplace
-              </h1>
+              <h1 className="text-4xl font-bold text-white">Marketplace</h1>
               <p className="text-gray-300 pb-4 mt-2">
                 Discover and rent premium advertising spaces.
               </p>
@@ -29,7 +38,6 @@ const MarketplacePage = () => {
                   Create New AD
                 </InteractiveHoverButton>
               </Link>
-              
             </div>
           </div>
         </div>
