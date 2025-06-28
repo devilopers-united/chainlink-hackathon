@@ -70,7 +70,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
               </Link>
             )}
             <Link
-              href="/docsPage"
+              href="/docs"
               className="text-white opacity-65 hover:opacity-100 transition-opacity duration-200"
             >
               Docs

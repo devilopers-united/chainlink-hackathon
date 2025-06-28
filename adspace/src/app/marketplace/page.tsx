@@ -11,15 +11,6 @@ import { useEffect } from "react";
 
 const MarketplacePage = () => {
   const { provider, account } = useWallet();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!account) {
-      router.push("/");
-    }
-  }, [account, router]);
-
-  if (!account) return null;
 
   return (
     <div className="min-h-screen">

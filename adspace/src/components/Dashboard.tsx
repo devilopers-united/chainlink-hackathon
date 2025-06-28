@@ -189,7 +189,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-2"
+            className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-white mb-4"
           >
             Dashboard
           </motion.h1>
