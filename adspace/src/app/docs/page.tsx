@@ -73,17 +73,17 @@ const Page = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8 m-8">
-      <div className="text-left mb-12">
-        <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-white mb-4">
-          Installation
-        </h1>
-        <p className="text-xl text-gray-300 max-w-2xl">
-          How to install dependencies and structure your app with shadcn/ui
-        </p>
+    <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8 m-8">
+      <div className="px-4 md:px-8 flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-4">
+        <div>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">Installation</h1>
+            <p className="text-gray-300 pb-4 mt-2 text-base md:text-sm">
+            Integrate the Tokenized Adspace component into your application to enable seamless, on-chain management and monetization of advertising space. Follow the steps below to get started with installation and configuration.
+            </p>
+        </div>
       </div>
 
-      <div className="mb-12 p-8 bg-[#1a1a1a] rounded-2xl shadow-sm shadow-[#212121]">
+      <div className="mb-12 p-8 bg-[#1a1a1a] rounded-2xl">
         <h2 className="text-2xl font-semibold text-white mb-4">
           Pick Your Framework
         </h2>

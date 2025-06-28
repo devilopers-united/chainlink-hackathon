@@ -4,11 +4,21 @@ import { Code, Codesandbox, SlidersHorizontal } from 'lucide-react'
 
 const Footer = () => {
     return (
-        <div className='w-[80vw] border-2 border-[#dddddd77] overflow-hidden mx-auto rounded-4xl pb-10 mb-16'>
-        <div className='absolute pt-40 pl-20'>
-            <div className='text-5xl'>Hello</div>
-            <div className='text-lg py-2 pl-0.5'>Hello</div>
-        </div>
+        <div className='w-[80vw] border-2 border-[#dddddd77] bg-white overflow-hidden mx-auto rounded-4xl pb-10 mb-16'>
+            <div className='absolute pt-40 pl-20'>
+                <div className='text-5xl font-black w-xl text-[#121212] tracking-tight'>Cut through the noise, know what's real</div>
+                <div className="w-56 text-xl flex gap-1 py-4 items-center justify-start tracking-tight font-semibold cursor-pointer">
+                    <div className="w-8 h-8 bg-[#f26522] rounded-sm">
+                        <p className="text-white text-sm pl-1 pt-[1px]">AD</p>
+                    </div>
+                    <div className="flex items-center justify-center text-black pb-1">
+                        Adspace
+                    </div>
+                </div>
+                    <div className='text-zinc-600 w-lg'>
+                        Unlock the value of your audience. Effortlessly connect your platform to premium advertisers and start earning in minutes.
+                    </div>
+            </div>
             <div className='h-[500px] right-4 w-full relative'>
                 <CardSwap
                     cardDistance={60}

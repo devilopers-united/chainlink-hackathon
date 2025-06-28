@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import axios from "axios";
 import AdSpaceNFT from "../contract/abi/AdSpaceNFT.json";
 import AdCard from "./AdCard";
-import { SkeletonCard } from "./ui/skeleton";
+import { Skeleton } from "./ui/skeleton";
 
 interface MarketplaceProps {
   provider: ethers.BrowserProvider | null;
@@ -134,14 +134,14 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
 
       {loading ? (
         <div className="">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-center items-center place-items-center mx-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center place-items-center mx-2 sm:mx-4">
             {[...Array(4)].map((_, i) => (
-              <SkeletonCard key={i} />
+              <Skeleton className=" w-[300px] h-[430px] rounded-3xl"/>
             ))}
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-center items-center place-items-center mx-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center place-items-center mx-2 sm:mx-4">
           {adSpaces.map((space) => (
             <AdCard key={space.tokenId} space={space} />
           ))}

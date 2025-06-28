@@ -48,7 +48,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.5, ease: easeInOutCubic }}
           className={` tracking-tighter font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl ${schibstedGrotesk.className} max-w-3xl mx-auto`}
         >
-          Your webpages 
+          Your websites 
           <br/>
           runs the world
         </motion.h1>

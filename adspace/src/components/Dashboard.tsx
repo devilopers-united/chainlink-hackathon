@@ -181,26 +181,14 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#121212] my-10 p-9"
+      className="min-h-screen bg-[#121212] px-20 py-12"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-center mb-8">
-          <motion.h1
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-white mb-4"
-          >
-            Dashboard
-          </motion.h1>
-          <motion.p
-            initial={{ y: -10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-gray-400 mb-6 text-lg"
-          >
+      <div className="px-4 md:px-8 flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-4">
+        <div>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">Dashboard</h1>
+          <p className="text-gray-300 pb-4 mt-2 text-base md:text-lg">
             Manage your advertising spaces and campaigns
-          </motion.p>
+          </p>
         </div>
       </div>
 
