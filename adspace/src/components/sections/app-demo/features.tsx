@@ -109,7 +109,7 @@ export const Features = () => {
           className="translate-y-centered-offset absolute top-1/3 text-2xl pr-56 left-0"
         >
           <span className="text-orange-400 text-3xl">
-            Discover, Connect, and Earn—All Anonymously
+            Discover, Connect, and Earn - All Anonymously
           </span>
           <br />
           Unlock a world of engaging content and fair rewards. Every interaction supports creators and enthusiasts, empowering you to earn more while protecting your privacy.
