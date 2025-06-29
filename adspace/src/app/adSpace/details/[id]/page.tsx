@@ -338,7 +338,7 @@ const AdSpaceDetailsPage = () => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        const contractAddress = "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682";
+        const contractAddress = "0xd9A04562B2ea577007097B013e625F0CB2Fbf83A";
         const contract = new ethers.Contract(
           contractAddress,
           AdSpaceNFT,
@@ -394,7 +394,7 @@ const AdSpaceDetailsPage = () => {
     console.log("Total USD Amount (18 decimals):", totalUsdAmount.toString());
     const provider = new ethers.BrowserProvider(window.ethereum);
     const contract = new ethers.Contract(
-      "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
+      "0xd9A04562B2ea577007097B013e625F0CB2Fbf83A",
       AdSpaceNFT,
       provider
     );
@@ -554,7 +554,7 @@ const AdSpaceDetailsPage = () => {
       if (!adMetadataURI) throw new Error("Metadata upload failed.");
 
       const contract = new ethers.Contract(
-        "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
+        "0xd9A04562B2ea577007097B013e625F0CB2Fbf83A",
         AdSpaceNFT,
         signer
       );

@@ -9,8 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
-import { InteractiveHoverButton } from "./ui/interactive-hover-button";
-import { Button } from "./ui/button";
 
 interface DashboardProps {
   provider: ethers.BrowserProvider | null;
@@ -53,7 +51,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
       setLoading(true);
       try {
         const contract = new ethers.Contract(
-          "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
+          "0xd9A04562B2ea577007097B013e625F0CB2Fbf83A",
           AdSpaceNFT,
           provider
         );
@@ -125,10 +123,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                 height: Number(space.height.toString()) || 0,
                 width: Number(space.width.toString()) || 0,
                 tags: space.tags || [],
-                hourlyRentalRate: ethers.formatUnits(
-                  space.hourlyRentalRate.toString() || "0",
-                  18
-                ),
+                hourlyRentalRate: space.hourlyRentalRate.toString(),
                 status: status,
                 name: metadata.name,
                 description: metadata.description,

@@ -40,7 +40,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
       setLoading(true);
       try {
         const contract = new ethers.Contract(
-          "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
+          "0xd9A04562B2ea577007097B013e625F0CB2Fbf83A",
           AdSpaceNFT,
           provider
         );
