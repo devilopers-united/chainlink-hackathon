@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import AdSpaceNFT from "../contract/abi/AdSpaceNFT.json";
 import { useWallet } from "@/context/WalletContext";
+import { X } from "lucide-react"; // For close icon in chips
 
 const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
   provider,
@@ -28,6 +29,30 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
       console.log("Account updated in MintAdSpace:", account);
     }
   }, [account]);
+
+  useEffect(() => {
+    switch (spaceType) {
+      case "Header":
+        setHeight("300");
+        setWidth("100");
+        break;
+      case "Sidebar":
+        setHeight("75");
+        setWidth("300");
+        break;
+      case "Popup":
+        setHeight("200");
+        setWidth("200");
+        break;
+      case "Footer":
+        setHeight("600");
+        setWidth("50");
+        break;
+      default:
+        setHeight("");
+        setWidth("");
+    }
+  }, [spaceType]);
 
   const uploadToIPFS = async (file: File): Promise<string | null> => {
     try {
@@ -173,6 +198,53 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
     }
   };
 
+  const spaceTypeOptions = [
+    "Header",
+    "Sidebar",
+    "Popup",
+    "Footer",
+    "Custom",
+    "Other",
+  ];
+  const spaceIdOptions = [
+    "home-header",
+    "home-hero",
+    "home-sidebars",
+    "home-footer",
+    "popup-banner",
+    "sidebar-left",
+    "sidebar-right",
+  ];
+  const categoryOptions = [
+    "E-commerce",
+    "Tech",
+    "Finance",
+    "Health",
+    "Education",
+    "Travel",
+    "Entertainment",
+    "NFTs",
+    "Decentralized_Exchange",
+    "Web3 Infrastructure",
+    "AI Models",
+    "Gaming",
+    "Social Media",
+    "Crypto",
+    "Other",
+  ];
+
+  const handleTagChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptions = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setTags(selectedOptions);
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
+
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-4xl mx-auto">
@@ -228,6 +300,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
             <div className="space-y-1">
               <label className="text-gray-300 text-sm">Website URL</label>
               <input
+                placeholder="https://example.com"
                 type="text"
                 value={websiteURL}
                 onChange={(e) => setWebsiteURL(e.target.value)}
@@ -238,6 +311,7 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
             <div className="space-y-1">
               <label className="text-gray-300 text-sm">Page URL</label>
               <input
+                placeholder="https://example.com/page/adspace"
                 type="text"
                 value={pageURL}
                 onChange={(e) => setPageURL(e.target.value)}
@@ -247,41 +321,47 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
 
             <div className="space-y-1">
               <label className="text-gray-300 text-sm">Space Type</label>
-              <input
-                type="text"
+              <select
                 value={spaceType}
                 onChange={(e) => setSpaceType(e.target.value)}
                 className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
-              />
+              >
+                <option value="" disabled>
+                  Select Space Type
+                </option>
+                {spaceTypeOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="space-y-1">
-              <label className="text-gray-300 text-sm">Space ID</label>
-              <input
-                type="text"
+              <label className="text-gray-300 text-sm">Space Type ID</label>
+              <select
                 value={spaceId}
                 onChange={(e) => setSpaceId(e.target.value)}
                 className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
-              />
+              >
+                <option value="" disabled>
+                  Select Space ID
+                </option>
+                {spaceIdOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="space-y-1">
-              <label className="text-gray-300 text-sm">Category</label>
-              <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-gray-300 text-sm">Height (px)</label>
+              <label className="text-gray-300 text-sm ">Height (px)</label>
               <input
                 type="number"
                 value={height}
-                onChange={(e) => setHeight(e.target.value)}
-                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+                disabled
+                className="w-full p-3 bg-gray-800 text-white   rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
               />
             </div>
 
@@ -290,11 +370,27 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
               <input
                 type="number"
                 value={width}
-                onChange={(e) => setWidth(e.target.value)}
-                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+                disabled
+                className="w-full p-3 bg-gray-800 text-white   rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
               />
             </div>
-
+            <div className="space-y-1">
+              <label className="text-gray-300 text-sm">Category</label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                {categoryOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="space-y-1">
               <label className="text-gray-300 text-sm">Hourly Rate (USD)</label>
               <input
@@ -305,16 +401,18 @@ const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
               />
             </div>
 
-            <div className="space-y-1">
+            <div className="md:col-span-2 space-y-1">
               <label className="text-gray-300 text-sm">
                 Tags (comma separated)
               </label>
-              <input
-                type="text"
-                value={tags.join(",")}
-                onChange={(e) => setTags(e.target.value.split(","))}
-                className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
-              />
+              <div className="w-full">
+                <input
+                  type="text"
+                  value={tags.join(",")}
+                  onChange={(e) => setTags(e.target.value.split(","))}
+                  className="w-full p-3 bg-gray-700/80 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 hover:bg-gray-700"
+                />
+              </div>
             </div>
 
             <div className="md:col-span-2 space-y-1">

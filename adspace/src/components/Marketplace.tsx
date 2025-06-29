@@ -35,10 +35,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
   useEffect(() => {
     const fetchAdSpaces = async () => {
       if (!provider) {
-        setError(
-          "If not connected !!! Please connect your wallet to view ad spaces"
-        );
-        return;
+        return; // No error set here, handled by parent
       }
       setLoading(true);
       try {
@@ -94,13 +91,10 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
                 height: Number(space.height.toString()) || 0,
                 width: Number(space.width.toString()) || 0,
                 tags: space.tags || [],
-                hourlyRentalRate: ethers.formatUnits(
-                  space.hourlyRentalRate.toString() || "0",
-                  18
-                ),
+                hourlyRentalRate: space.hourlyRentalRate.toString(), // Use raw integer
                 status:
                   Object.keys({ 0: "Available", 1: "Rented", 2: "Paused" })[
-                  Number(space.status.toString()) || 0
+                    Number(space.status.toString()) || 0
                   ] || "Unknown",
                 name: metadata.name,
                 description: metadata.description,
@@ -136,7 +130,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ provider }) => {
         <div className="">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center place-items-center mx-2 sm:mx-4">
             {[...Array(4)].map((_, i) => (
-              <Skeleton className=" w-[300px] h-[430px] rounded-3xl"/>
+              <Skeleton key={i} className=" w-[300px] h-[430px] rounded-3xl" />
             ))}
           </div>
         </div>

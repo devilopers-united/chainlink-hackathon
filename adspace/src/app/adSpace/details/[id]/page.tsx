@@ -24,7 +24,13 @@ interface AdSpace {
   image?: string;
 }
 
-const AdSpaceDetails = ({ space }: { space: AdSpace | null }) => {
+const AdSpaceDetails = ({
+  space,
+  id,
+}: {
+  space: AdSpace | null;
+  id: string;
+}) => {
   if (!space) return null;
 
   return (
@@ -49,17 +55,17 @@ const AdSpaceDetails = ({ space }: { space: AdSpace | null }) => {
           <h2 className="text-2xl font-bold text-white">
             {space.name || `Ad Space #${space.tokenId}`}
           </h2>
-          <span
+          {/* <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
               space.status === "Available"
                 ? "bg-green-900/50 text-green-400"
                 : space.status === "Rented"
                 ? "bg-yellow-900/50 text-yellow-400"
-                : "bg-gray-700 text-gray-300"
+                : "bg-gray-700 text-gray-300" // Paused status
             }`}
           >
             {space.status}
-          </span>
+          </span> */}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -89,6 +95,10 @@ const AdSpaceDetails = ({ space }: { space: AdSpace | null }) => {
               {space.width}x{space.height}px
             </p>
           </div>
+          <div className="bg-gray-800/50 p-3 rounded-lg">
+            <p className="text-gray-400 text-sm">Space Token ID</p>
+            <p className="text-white font-medium">{id}</p>
+          </div>
         </div>
 
         <div className="bg-gray-800/50 p-4 rounded-lg">
@@ -107,13 +117,6 @@ const AdSpaceDetails = ({ space }: { space: AdSpace | null }) => {
             ))}
           </div>
         </div>
-
-        {space.description && (
-          <div className="bg-gray-800/50 p-4 rounded-lg">
-            <p className="text-gray-400 text-sm mb-1">Description</p>
-            <p className="text-white">{space.description}</p>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -366,9 +369,7 @@ const AdSpaceDetailsPage = () => {
           tags: spaceData.tags,
           hourlyRentalRate: spaceData.hourlyRentalRate.toString(), // Raw USD integer
           status:
-            Object.keys({ 0: "Available", 1: "Rented", 2: "Paused" })[
-              Number(status)
-            ] || "Unknown",
+            status === 0 ? "Available" : status === 1 ? "Rented" : "Paused",
           name: metadata.name,
           description: metadata.description,
           image: metadata.image,
@@ -384,40 +385,40 @@ const AdSpaceDetailsPage = () => {
     fetchAdSpaceDetails();
   }, [id]);
 
- const calculateEthRequired = async (startTime: number, endTime: number) => {
-   if (!space) return ethers.parseEther("0.01");
-   const durationInSeconds = Math.max(3600, endTime - startTime); // Minimum 1 hour
-   const hourlyRate = BigInt(space.hourlyRentalRate); // Raw USD integer
-   const totalUsdAmount =
-     ((hourlyRate * BigInt(1e18)) / BigInt(3600)) * BigInt(durationInSeconds); // Scale to 18 decimals
-   console.log("Total USD Amount (18 decimals):", totalUsdAmount.toString());
-   const provider = new ethers.BrowserProvider(window.ethereum);
-   const contract = new ethers.Contract(
-     "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
-     AdSpaceNFT,
-     provider
-   );
-   const usdFee = (totalUsdAmount * BigInt(5)) / BigInt(100); // 5% platform fee
-   const usdToPublisher = totalUsdAmount - usdFee;
-   console.log(
-     "USD to Publisher:",
-     usdToPublisher.toString(),
-     "USD Fee:",
-     usdFee.toString()
-   );
-   const ethFee = await contract.getETHAmountForUSD(usdFee);
-   const ethToPublisher = await contract.getETHAmountForUSD(usdToPublisher);
-   const totalEthRequired = ethFee + ethToPublisher;
-   console.log(
-     "ETH to Publisher:",
-     ethers.formatEther(ethToPublisher),
-     "ETH Fee:",
-     ethers.formatEther(ethFee),
-     "Total ETH Required:",
-     ethers.formatEther(totalEthRequired)
-   );
-   return totalEthRequired > 0 ? totalEthRequired : ethers.parseEther("0.01");
- };
+  const calculateEthRequired = async (startTime: number, endTime: number) => {
+    if (!space) return ethers.parseEther("0.01");
+    const durationInSeconds = Math.max(3600, endTime - startTime); // Minimum 1 hour
+    const hourlyRate = BigInt(space.hourlyRentalRate); // Raw USD integer
+    const totalUsdAmount =
+      ((hourlyRate * BigInt(1e18)) / BigInt(3600)) * BigInt(durationInSeconds); // Scale to 18 decimals
+    console.log("Total USD Amount (18 decimals):", totalUsdAmount.toString());
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const contract = new ethers.Contract(
+      "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682",
+      AdSpaceNFT,
+      provider
+    );
+    const usdFee = (totalUsdAmount * BigInt(5)) / BigInt(100); // 5% platform fee
+    const usdToPublisher = totalUsdAmount - usdFee;
+    console.log(
+      "USD to Publisher:",
+      usdToPublisher.toString(),
+      "USD Fee:",
+      usdFee.toString()
+    );
+    const ethFee = await contract.getETHAmountForUSD(usdFee);
+    const ethToPublisher = await contract.getETHAmountForUSD(usdToPublisher);
+    const totalEthRequired = ethFee + ethToPublisher;
+    console.log(
+      "ETH to Publisher:",
+      ethers.formatEther(ethToPublisher),
+      "ETH Fee:",
+      ethers.formatEther(ethFee),
+      "Total ETH Required:",
+      ethers.formatEther(totalEthRequired)
+    );
+    return totalEthRequired > 0 ? totalEthRequired : ethers.parseEther("0.01");
+  };
 
   function getEpochTime(date: Date): number {
     return Math.floor(date.getTime() / 1000);
@@ -696,7 +697,7 @@ const AdSpaceDetailsPage = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <AdSpaceDetails space={space} />
+          <AdSpaceDetails space={space} id={id} />
           <RentForm
             rentForm={rentForm}
             setRentForm={setRentForm}

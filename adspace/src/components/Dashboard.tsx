@@ -185,7 +185,9 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
     >
       <div className="px-4 md:px-8 flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-white">Dashboard</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            Dashboard
+          </h1>
           <p className="text-gray-300 pb-4 mt-2 text-base md:text-lg">
             Manage your advertising spaces and campaigns
           </p>
@@ -296,7 +298,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
             {loading ? (
               <div className="space-y-4">
                 <div className="grid grid-cols-12 gap-4 px-4 py-2 bg-gray-800 rounded-lg">
-                  {[...Array(6)].map((_, i) => (
+                  {[...Array(7)].map((_, i) => (
                     <Skeleton key={i} className="h-6 bg-gray-800 rounded" />
                   ))}
                 </div>
@@ -305,7 +307,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                     key={i}
                     className="grid grid-cols-12 gap-4 px-4 py-3 bg-gray-900 rounded-lg items-center"
                   >
-                    {[...Array(6)].map((_, j) => (
+                    {[...Array(7)].map((_, j) => (
                       <Skeleton key={j} className="h-4 bg-gray-800 rounded" />
                     ))}
                   </div>
@@ -343,8 +345,11 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
             ) : (
               <div className="space-y-4">
                 <div className="grid grid-cols-12 gap-4 px-4 py-3 bg-gray-800/50 rounded-lg backdrop-blur-sm">
-                  <div className="col-span-4 font-medium text-gray-300">
+                  <div className="col-span-3 font-medium text-gray-300">
                     Ad Space
+                  </div>
+                  <div className="col-span-2 font-medium text-gray-300">
+                    Token ID
                   </div>
                   <div className="col-span-2 font-medium text-gray-300">
                     Time Remaining
@@ -352,7 +357,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                   <div className="col-span-2 font-medium text-gray-300">
                     Ends At
                   </div>
-                  <div className="col-span-2 font-medium text-gray-300">
+                  <div className="col-span-1 font-medium text-gray-300">
                     Status
                   </div>
                   <div className="col-span-2 font-medium text-gray-300">
@@ -367,7 +372,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                     transition={{ delay: i * 0.1 }}
                     className="grid grid-cols-12 gap-4 px-4 py-3 bg-gray-900/30 hover:bg-gray-800/50 rounded-lg items-center transition-all duration-300 backdrop-blur-sm"
                   >
-                    <div className="col-span-4 text-white flex items-center space-x-3">
+                    <div className="col-span-3 text-white flex items-center space-x-3">
                       {campaign.image && (
                         <div className="h-10 w-10 rounded-md overflow-hidden">
                           <img
@@ -387,6 +392,9 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                       </div>
                     </div>
                     <div className="col-span-2 text-blue-400">
+                      {campaign.tokenId}
+                    </div>
+                    <div className="col-span-2 text-blue-400">
                       {campaign.endTime
                         ? formatTimeRemaining(campaign.endTime)
                         : "N/A"}
@@ -394,7 +402,7 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                     <div className="col-span-2 text-gray-300">
                       {campaign.endTime ? formatDate(campaign.endTime) : "N/A"}
                     </div>
-                    <div className="col-span-2">
+                    <div className="col-span-1">
                       <span className="px-3 py-1 bg-green-900/30 text-green-400 text-xs rounded-full border border-green-800/50">
                         Active
                       </span>

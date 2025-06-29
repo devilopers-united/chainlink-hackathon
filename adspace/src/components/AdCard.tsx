@@ -24,7 +24,6 @@ interface AdSpace {
 
 const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
   const router = useRouter();
-
   const [isHover, setIsHover] = useState(false);
 
   if (!space) {
@@ -67,14 +66,12 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
 
       <div className="relative h-full flex flex-col justify-end p-6">
         <h3 className="text-xl font-bold text-white mb-1 line-clamp-1">
-          {space.name || `Ad Space #${space.tokenId}`}
+          {space.name
+            ? space.name.includes("AdSpace #")
+              ? space.name.split(" - ")[1] || space.name // Fallback to original if no " - " exists
+              : space.name
+            : `Ad Space #${space.tokenId}`}
         </h3>
-
-        {space.description && (
-          <p className="text-gray-300 text-sm mb-3 line-clamp-2">
-            {space.description}
-          </p>
-        )}
 
         <div className="flex flex-wrap gap-2 mb-4">
           {space.tags.length > 0 ? (
@@ -97,10 +94,8 @@ const AdCard: React.FC<{ space: AdSpace | undefined }> = ({ space }) => {
           <div className="flex items-center gap-1">
             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span className="font-medium text-white">
-              ${parseFloat(space.hourlyRentalRate).toFixed(2)}
-              <span className="text-gray-400 text-xs font-normal ml-1">
-                /day
-              </span>
+              ${space.hourlyRentalRate} /hour
+              <span className="text-gray-400 text-xs font-normal ml-1"></span>
             </span>
           </div>
 
