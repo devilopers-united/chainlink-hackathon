@@ -6,6 +6,8 @@ const ABI = [
 ];
 const PROVIDER_URL = "https://sepolia.infura.io/v3/c542488da7c04aef9a134949bfc1879f";
 
+const CONTRACT_ADDRESS = "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682";
+
 type Ad = {
     image: string;
     websiteURL: string;
@@ -14,10 +16,9 @@ type Ad = {
 
 type AdSpaceProviderProps = {
     tokenId: number;
-    contractAddress: string;
 };
 
-const AdSpaceProvider = ({ tokenId, contractAddress }: AdSpaceProviderProps) => {
+const AdSpaceProvider = ({ tokenId }: AdSpaceProviderProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [ad, setAd] = useState<Ad | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -34,7 +35,7 @@ const AdSpaceProvider = ({ tokenId, contractAddress }: AdSpaceProviderProps) => 
             try {
                 // For ethers v6, use JsonRpcProvider directly
                 const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
-                const contract = new Contract(contractAddress, ABI, provider);
+                const contract = new Contract(CONTRACT_ADDRESS, ABI, provider);
 
                 // Call the contract function
                 const adURI = await contract.getCurrentAd(tokenId);
@@ -76,7 +77,7 @@ const AdSpaceProvider = ({ tokenId, contractAddress }: AdSpaceProviderProps) => 
         return () => {
             mounted = false; // Cleanup function
         };
-    }, [tokenId, contractAddress]);
+    }, [tokenId, CONTRACT_ADDRESS]);
 
     return (
         <div className="adspace-provider-container">

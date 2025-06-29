@@ -205,17 +205,16 @@ export const SamePage = () => {
             </motion.span>
           </motion.div>
 
-          <motion.p
+            <motion.p
             className="absolute top-1/2 left-[calc(50%-32rem)] w-[30rem] translate-y-[calc(-50%_+_var(--y))] leading-tight text-white text-4xl"
             style={{ opacity: endTextOpacity, "--y": endTexty } as any}
-          >
+            >
             <span className="text-orange-400">
-              Unlock NFT-Powered Ad Spaces with Real-Time Chainlink-Priced
-              Rentals.
+              Maximize your brand's impact with premium, targeted ad space.
             </span>
-            <br />
-            Start Advertising in Web3 !
-          </motion.p>
+            <span className="px-1" />
+            Secure your spot and connect with engaged audiences today!
+            </motion.p>
         </div>
         <motion.p
           style={
@@ -225,12 +224,12 @@ export const SamePage = () => {
               position,
             } as any
           }
-          className="top-1/2 left-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pl-16 text-6xl leading-tight text-white"
+          className="top-1/2 left-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pl-16 text-4xl leading-tight text-white"
         >
-          Pay in ETH, Priced in USD !
+          Transform your page into a valuable digital asset,
           <span className="text-orange-400">
             {" "}
-            Powered by Chainlink Oracles!.
+            Empowered by Chainlink Oracles & Blockchain!
           </span>
         </motion.p>
         <motion.p
@@ -241,11 +240,12 @@ export const SamePage = () => {
               position,
             } as any
           }
-          className="top-1/2 right-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pr-16 text-6xl leading-tight text-white"
+          className="top-1/2 right-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pr-16 text-4xl leading-tight text-white"
         >
-          Track Performance On-Chain <br />
+          Effortlessly unlock new revenue streams,
+          <br />
           <span className="text-orange-400">
-            Every Ad Impression is Verifiable & Transparent.
+            Reach your ideal audience in seconds.
           </span>
         </motion.p>
       </div>

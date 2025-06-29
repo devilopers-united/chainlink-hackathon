@@ -80,36 +80,39 @@ export const Features = () => {
             opacity: text1Opacity,
             "--y": text1Y,
           })}
-          className="translate-y-centered-offset absolute text-4xl pr-56 top-1/3 left-0"
+          className="translate-y-centered-offset absolute text-2xl pr-56 top-1/3 left-0"
         >
-          <span className="text-orange-400">
-            Launch Web3 Ads on Premium NFT Spaces{" "}
+          <span className="text-orange-400 text-3xl">
+            Effortless Integration for Developers & Publishers
           </span>
           <br />
-          No Gatekeepers, Just Blockchain.
+          Instantly embed AD spaces into your dApp or website - no custom coding required. Focus on building, while we handle the AD tech.
         </motion.p>
         <motion.p
           style={stylesWithCssVar({
             opacity: text2Opacity,
             "--y": text2Y,
           })}
-          className="translate-y-centered-offset absolute top-1/3 pr-56 text-4xl left-0"
+          className="translate-y-centered-offset absolute top-1/3 pr-56 text-2xl left-0"
         >
-          <span className="text-orange-400">List Once, Earn Forever</span>
+          <span className="text-orange-400 text-3xl">
+            Seamless Wallet Connection, Unmatched Security!
+          </span>
           <br />
-          Let Brands Rent Your NFT Space Automatically.
+          Effortlessly connect your wallet and explore a secure, transparent ecosystem - powered by blockchain, protected from risks.
         </motion.p>
         <motion.p
           style={stylesWithCssVar({
             opacity: text3Opacity,
             "--y": text3Y,
           })}
-          className="translate-y-centered-offset absolute top-1/3 text-4xl pr-56 left-0"
+          className="translate-y-centered-offset absolute top-1/3 text-2xl pr-56 left-0"
         >
-          <span className="text-orange-400">See How It Works </span>
+          <span className="text-orange-400 text-3xl">
+            Discover, Connect, and Earn—All Anonymously
+          </span>
           <br />
-          Connect Wallet, Pay in Crypto, Explore Listings & Reach Web3 Audiences
-          !
+          Unlock a world of engaging content and fair rewards. Every interaction supports creators and enthusiasts, empowering you to earn more while protecting your privacy.
         </motion.p>
       </div>
     </section>
