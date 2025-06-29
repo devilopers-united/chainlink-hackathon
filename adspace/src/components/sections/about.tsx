@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Familjen_Grotesk } from "next/font/google";
 import { motion } from "framer-motion";
 import { TextReveal } from '../ui/text-reveal';
+import { TextEffect } from '../ui/text-effect';
 
 
 const Grotesk = Familjen_Grotesk({
@@ -57,8 +58,12 @@ const About = () => {
                     Why is decentralized intelligence important?
                 </div>
 
-                <div className='w-1/2 h-auto'>
-                    <TextReveal className='text-black h-[50vh]'>Magic UI will change the way you design.</TextReveal>
+                <div className='w-full pl-60 h-auto'>
+                    <div className='text-black text-2xl tracking-tight pb-16 space-y-4'>
+                        <TextEffect per='char' preset='fade' className='text-black' speedReveal={2}>
+                            Traditional online advertising is dominated by centralized platforms that control data, revenue, and access. Decentralized Adspace changes this by enabling any website to tokenize their ad space, allowing direct, transparent, and secure transactions between publishers and advertisers. Join the movement to democratize digital advertising—where control, value, and opportunity are shared by all participants.
+                        </TextEffect>
+                    </div>
 
                 </div>
             </motion.div>

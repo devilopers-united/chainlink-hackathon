@@ -45,7 +45,7 @@ export const SamePage = () => {
       animationOrder.showLoadingScreenEnd,
       animationOrder.createBranchStart,
     ],
-    [3, 1, 1, 0.5]
+    [3, 1, 1, 0.75]
   );
   const x = useTransform(
     scrollYProgress,
@@ -74,7 +74,7 @@ export const SamePage = () => {
   const loadingScreenX = useTransform(
     scrollYProgress,
     [animationOrder.createBranchStart, animationOrder.createBranchEnd],
-    ["0%", "27%"]
+    ["0%", "40%"]
   );
   const loadingScreenscale = useTransform(
     scrollYProgress,
@@ -150,10 +150,10 @@ export const SamePage = () => {
       <div className="relative h-[800vh]">
         <div className="sticky top-1/2 flex origin-center -translate-y-1/2 justify-center">
           <motion.div
-            style={{ opacity: newBranchOpacity }} className="text-white text-6xl w-full text-center -top-72 absolute">
-            Explore
-            <div className="text-orange-400">
-              Good of Both!
+            style={{ opacity: newBranchOpacity }} className="flex mx-auto justify-center text-white text-6xl w-full text-center -top-72 absolute">
+            Amazings
+            <div className="pl-3 text-orange-400">
+                of Both!
             </div>
           </motion.div>
           <motion.div
@@ -162,7 +162,7 @@ export const SamePage = () => {
           >
             <img
               alt=""
-              src="/main-screen.svg"
+              src="/publisher.svg"
               className="h-[75vh] max-h-[48vw] w-auto"
             />
             <motion.span
@@ -185,7 +185,7 @@ export const SamePage = () => {
           >
             <img
               alt=""
-              src="/loading-screen.svg"
+              src="/advertiser.svg"
               className="h-[75vh] max-h-[48vw] w-auto"
             />
             <motion.div
@@ -194,7 +194,7 @@ export const SamePage = () => {
             >
               <img
                 alt=""
-                src="/main-screen.svg"
+                src="/advertiser.svg"
                 className="h-[75vh] max-h-[48vw] w-auto"
               />
             </motion.div>

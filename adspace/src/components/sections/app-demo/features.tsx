@@ -58,7 +58,7 @@ export const Features = () => {
             <div className="sticky top-[16.7vh] h-[66.8vh] px-16 text-2xl leading-[1] text-white [&_p]:w-[45rem] [&_p]:max-w-[90%]">
                 <motion.div style={{ x, scale }} className="relative h-full">
                     <motion.figure style={{ opacity }} className="h-full">
-                        <img  alt="" src="/main-screen.svg" className="h-full w-auto" />
+                        <img  alt="" src="/code-use.svg" className="h-full w-auto" />
                     </motion.figure>
                     <motion.figure style={{ opacity: text2Opacity }}>
                         <img alt=""

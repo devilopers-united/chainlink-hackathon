@@ -4,7 +4,7 @@ import { Code, Codesandbox, SlidersHorizontal } from 'lucide-react'
 
 const Footer = () => {
     return (
-        <div className='w-[80vw] border-2 border-[#dddddd77] bg-white overflow-hidden mx-auto rounded-4xl pb-10 mb-16'>
+        <div className='w-[90vw] border-2 border-[#dddddd77] bg-white overflow-hidden mx-auto rounded-4xl pb-10 mb-16'>
             <div className='absolute pt-40 pl-20'>
                 <div className='text-5xl font-black w-xl text-[#121212] tracking-tight'>Cut through the noise, know what's real</div>
                 <div className="w-56 text-xl flex gap-1 py-4 items-center justify-start tracking-tight font-semibold cursor-pointer">

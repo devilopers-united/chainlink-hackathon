@@ -49,7 +49,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
                 Adspace
               </div>
               {typeof window !== "undefined" && window.scrollY > 100 && (
-                <div className="bg-zinc-400 mx-1 w-[2px] h-[24px] rounded-full transition-all ease-in-out duration-700"></div>
+                <div className="bg-zinc-400 mx-1 w-[2px] h-[24px] rounded-full transition-all opacity-15 ease-in-out duration-700"></div>
               )}
             </div>
           </Link>
