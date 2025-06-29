@@ -3,7 +3,7 @@ import { InstallationCode } from "../components/install-code";
 import { FrameworkUseCode } from "../components/framework-use-code";
 import { notFound } from "next/navigation";
 
-const page = ({ params }: { params: { slug: string } }) => {
+const page = async ({ params }: { params: { slug: string } }) => {
   const validSlugs = ["nextjs", "vite"];
 
   if (!validSlugs.includes(params.slug)) {
