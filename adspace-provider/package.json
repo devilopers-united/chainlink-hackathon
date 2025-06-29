@@ -1,6 +1,6 @@
 {
   "name": "adspace-provider",
-  "version": "0.0.73",
+  "version": "0.0.76",
   "description": "Tokenized AD space provider to render ads from Adspace.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

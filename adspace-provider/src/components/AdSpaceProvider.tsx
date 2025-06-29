@@ -6,7 +6,7 @@ const ABI = [
 ];
 const PROVIDER_URL = "https://sepolia.infura.io/v3/c542488da7c04aef9a134949bfc1879f";
 
-const CONTRACT_ADDRESS = "0x1C1B73B1D9b4eF7775b30C0301fdE00615C17682";
+const CONTRACT_ADDRESS = "0xd9A04562B2ea577007097B013e625F0CB2Fbf83A";
 
 type Ad = {
     image: string;
