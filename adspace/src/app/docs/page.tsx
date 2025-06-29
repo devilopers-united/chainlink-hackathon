@@ -88,9 +88,7 @@ const Page = () => {
           Pick Your Framework
         </h2>
         <p className="text-lg text-gray-300 mb-6">
-          shadcn/ui is built to work with all React frameworks. Start by
-          selecting your framework of choice, then follow the instructions to
-          install the dependencies and structure your app.
+          Tokenized Adspace works with modern React frameworks. Select your framework below and follow the tailored instructions to install dependencies and integrate on-chain ad management into your app.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -109,7 +107,7 @@ const Page = () => {
                   {framework.description}
                 </p>
                 <div className="flex items-center">
-                  <Button variant="link" className="text-blue-400 p-0 h-auto">
+                  <Button variant="ghost" className="text-black font-semibold bg-white h-auto">
                     Get started <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </div>

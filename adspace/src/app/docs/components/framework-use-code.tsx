@@ -5,8 +5,7 @@ import React from "react";
 import { CodeBlock } from "@/components/ui/code-block";
 
 export function FrameworkUseCode() {
-  const code = `
-  import { AdspaceProvider } from "adspace-provider"
+  const code = `import { AdspaceProvider } from "adspace-provider"
  
   export default function RootLayout({children}) {
     return (
@@ -26,7 +25,7 @@ export function FrameworkUseCode() {
       <CodeBlock
         language="jsx"
         filename="@app/layout.tsx"
-        highlightLines={[9, 13, 14, 18]}
+        highlightLines={[1, 6, 7]}
         code={code}
       />
     </div>

@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
+import { InteractiveHoverButton } from "./ui/interactive-hover-button";
 
 interface DashboardProps {
   provider: ethers.BrowserProvider | null;
@@ -214,13 +215,13 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
           <TabsList className="grid w-full grid-cols-2 gap-2 mb-8 bg-gray-800 p-1 rounded-xl h-12">
             <TabsTrigger
               value="created"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-300 h-10"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:bg-orange-400 data-[state=active]:to-orange-400 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-300 h-10 text-white font-semibold text-lg"
             >
               My Ad Spaces
             </TabsTrigger>
             <TabsTrigger
               value="ongoing"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-300 h-10"
+              className=" data-[state=active]:bg-orange-400 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-300 h-10 font-semibold text-lg text-white"
             >
               Ongoing Campaigns
             </TabsTrigger>
@@ -272,9 +273,11 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="mt-4 hover:cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg shadow-lg"
+                    className=" mt-4"
                   >
-                    Create Ad Space
+                    <InteractiveHoverButton>
+                      Create New Ad Space
+                    </InteractiveHoverButton>
                   </motion.button>
                 </Link>
               </motion.div>
