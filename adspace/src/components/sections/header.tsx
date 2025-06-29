@@ -1,10 +1,8 @@
 "use client";
-import { ArrowRightToLine, LogInIcon, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { useWallet } from "@/context/WalletContext";
 

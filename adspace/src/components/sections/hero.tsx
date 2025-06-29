@@ -1,6 +1,5 @@
 "use client";
 
-import Image from 'next/image';
 import { easeInOutCubic } from '@/lib/animation';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Schibsted_Grotesk } from 'next/font/google';

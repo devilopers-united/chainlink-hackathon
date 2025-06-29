@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image';
 import { Familjen_Grotesk } from "next/font/google";
 import { motion } from "framer-motion";
-import { TextReveal } from '../ui/text-reveal';
 import { TextEffect } from '../ui/text-effect';
 
 

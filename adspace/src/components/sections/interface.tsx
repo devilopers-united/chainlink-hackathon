@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { Section } from "../ui/section";
-import { motion, useScroll } from "framer-motion";
-import { useRef } from "react";
 import { Features } from "./app-demo/features";
 import { SamePage } from "./app-demo/same-page";
 import { StreamlinedExperience } from "./app-demo/streamlined-experience";

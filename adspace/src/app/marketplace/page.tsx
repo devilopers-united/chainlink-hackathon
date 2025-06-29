@@ -1,16 +1,11 @@
 "use client";
-import AdCard from "@/components/AdCard";
 import Marketplace from "@/components/Marketplace";
-import { Button } from "@/components/ui/button";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { useWallet } from "@/context/WalletContext";
-import { Plus } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const MarketplacePage = () => {
-  const { provider, account } = useWallet();
+  const { provider } = useWallet();
 
   return (
     <div className="min-h-screen ">

@@ -5,7 +5,6 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import AdSpaceNFT from "../contract/abi/AdSpaceNFT.json";
 import { useWallet } from "@/context/WalletContext";
-import { X } from "lucide-react"; // For close icon in chips
 
 const MintAdSpace: React.FC<{ provider: ethers.BrowserProvider | null }> = ({
   provider,
