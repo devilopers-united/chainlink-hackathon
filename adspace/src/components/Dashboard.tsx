@@ -10,6 +10,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { InteractiveHoverButton } from "./ui/interactive-hover-button";
+import { Button } from "./ui/button";
 
 interface DashboardProps {
   provider: ethers.BrowserProvider | null;
@@ -273,11 +274,9 @@ const Dashboard: React.FC<DashboardProps> = ({ provider }) => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className=" mt-4"
+                    className=" mt-4 px-6 py-2 bg-white text-black hover:invert rounded-4xl"
                   >
-                    <InteractiveHoverButton>
-                      Create New Ad Space
-                    </InteractiveHoverButton>
+                    Create New Ad Space
                   </motion.button>
                 </Link>
               </motion.div>
