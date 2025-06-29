@@ -7,6 +7,7 @@ import { Schibsted_Grotesk } from 'next/font/google';
 import { useRef, useEffect } from 'react';
 import { InteractiveHoverButton } from '../ui/interactive-hover-button';
 import ImageSwap from '../ui/image-swap';
+import Link from 'next/link';
 
 const schibstedGrotesk = Schibsted_Grotesk({
   subsets: ['latin'],
@@ -48,15 +49,15 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.5, ease: easeInOutCubic }}
           className={` tracking-tighter font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl ${schibstedGrotesk.className} max-w-3xl mx-auto`}
         >
-          Your websites 
-          <br/>
+          Your website
+          <br />
           runs the world
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7, ease: easeInOutCubic }}
-          className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-center text-zinc-400 tracking-tight font-medium mb-4"
+        className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-center text-zinc-400 tracking-tight font-medium mb-4"
         >
           Unlock the value of your audience. Effortlessly connect your platform to premium advertisers and start earning in minutes.
         </motion.p>
@@ -65,9 +66,11 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9, ease: easeInOutCubic }}
         >
-          <InteractiveHoverButton className='text-base sm:text-lg px-6 py-1'>
-            Explore Marketplace
-          </InteractiveHoverButton>
+          <Link href="/marketplace">
+            <InteractiveHoverButton className='text-base sm:text-lg px-6 py-1'>
+              Explore Marketplace
+            </InteractiveHoverButton>
+          </Link>
         </motion.div>
 
         <motion.div
@@ -87,7 +90,7 @@ export function Hero() {
             { src: "/images/service.svg", alt: "Services" },
             { src: "/images/store.svg", alt: "Store" },
           ]} />
-        
+
         </motion.div>
       </main>
     </motion.section>

@@ -166,10 +166,9 @@ export const SamePage = () => {
               className="h-[75vh] max-h-[48vw] w-auto"
             />
             <motion.span
-              className="mt-3 block text-6xl text-center text-white"
+              className=" -mt-24 block text-4xl text-center text-white"
               style={{ opacity: newBranchOpacity }}
             >
-              {/* <BranchIcon className="mr-3 inline-block h-12 w-12" /> Feature */}
               Publisher
             </motion.span>
           </motion.div>
@@ -199,10 +198,9 @@ export const SamePage = () => {
               />
             </motion.div>
             <motion.span
-              className="mt-3 block text-6xl text-center text-white"
+              className="mt-3 block text-5xl text-center text-white"
               style={{ opacity: newBranchOpacity }}
             >
-              {/* <BranchIcon className="mr-3 inline-block h-12 w-12" /> Frontend */}
               Advertiser
             </motion.span>
           </motion.div>

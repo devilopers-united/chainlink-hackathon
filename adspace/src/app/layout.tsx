@@ -26,16 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <WalletProvider>
-        <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen bg-[#121212]`}
-            suppressHydrationWarning
-          >
+    <WalletProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen bg-[#121212]`}
+          suppressHydrationWarning={true}
+        >
+          <main className="max-w-screen">
             <Header className="sticky top-4 justify-center" />
-            <main className="max-w-screen">{children}</main>
-          </body>
-        </html>
-      </WalletProvider>
+            {children}
+          </main>
+        </body>
+      </html>
+    </WalletProvider>
   );
 }
