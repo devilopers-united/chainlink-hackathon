@@ -150,11 +150,11 @@ export const SamePage = () => {
       <div className="relative h-[800vh]">
         <div className="sticky top-1/2 flex origin-center -translate-y-1/2 justify-center">
           <motion.div
-            style={{ opacity: newBranchOpacity }} className="flex mx-auto justify-center text-white text-6xl w-full text-center -top-72 absolute">
+            style={{ opacity: newBranchOpacity }}
+            className="flex mx-auto justify-center text-white text-6xl w-full text-center -top-72 absolute"
+          >
             Amazings
-            <div className="pl-3 text-orange-400">
-                of Both!
-            </div>
+            <div className="pl-3 text-orange-400">of Both!</div>
           </motion.div>
           <motion.div
             className="absolute left-1/2 top-1/2 h-[75vh] max-h-[48vw] translate-x-[calc(-50%_+_var(--x))] -translate-y-1/2 scale-[var(--scale)] "
@@ -209,9 +209,12 @@ export const SamePage = () => {
             className="absolute top-1/2 left-[calc(50%-32rem)] w-[30rem] translate-y-[calc(-50%_+_var(--y))] leading-tight text-white text-4xl"
             style={{ opacity: endTextOpacity, "--y": endTexty } as any}
           >
-            <span className="text-orange-400">Built for flow</span>
+            <span className="text-orange-400">
+              Unlock NFT-Powered Ad Spaces with Real-Time Chainlink-Priced
+              Rentals.
+            </span>
             <br />
-            Spin up a new branch for any sized project in seconds.
+            Start Advertising in Web3 !
           </motion.p>
         </div>
         <motion.p
@@ -224,8 +227,11 @@ export const SamePage = () => {
           }
           className="top-1/2 left-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pl-16 text-6xl leading-tight text-white"
         >
-          Not only share code,
-          <span className="text-orange-400"> share the context.</span>
+          Pay in ETH, Priced in USD !
+          <span className="text-orange-400">
+            {" "}
+            Powered by Chainlink Oracles!.
+          </span>
         </motion.p>
         <motion.p
           style={
@@ -237,10 +243,9 @@ export const SamePage = () => {
           }
           className="top-1/2 right-[156px] w-[500px] translate-y-[calc(-50%_+_var(--y))] pr-16 text-6xl leading-tight text-white"
         >
-          Sometimes it's not about code.
-          <br />
+          Track Performance On-Chain <br />
           <span className="text-orange-400">
-            Get everybody on the same page. Literally.
+            Every Ad Impression is Verifiable & Transparent.
           </span>
         </motion.p>
       </div>
