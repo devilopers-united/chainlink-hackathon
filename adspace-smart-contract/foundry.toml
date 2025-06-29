@@ -1,0 +1,12 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = [
+    "@openzeppelin/=lib/openzeppelin-contracts/",
+    "@chainlink/=lib/chainlink/contracts/src/v0.8/",
+    "ds-test/=lib/ds-test/src/"
+]
+
+[profile.sepolia]
+chain_id = 11155111
