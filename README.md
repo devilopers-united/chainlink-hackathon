@@ -40,7 +40,7 @@ A [Next.js](https://nextjs.org/) application responsible for the end-user experi
 
 ---
 
-### 2. **Smart Contracts - [`adspaceContract`](./adspaceContract)**
+### 2. **Smart Contracts - [`adspace-smart-contract`](./adspace-smart-contract)**
 A Foundry-based smart contract system that powers the protocol’s core logic:
 
 #### ✅ `PiqselNFT.sol` (Main Contract)
@@ -59,7 +59,7 @@ AggregatorV3Interface internal priceFeed;
 function getETHAmountForUSD(...) uses priceFeed.latestRoundData()
 
 
-📄 [View `PiqselNFT.sol`](.adspace-smart-contract/src/PiqselNFT.sol)
+📄 [View `PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol)
 
 ---
 
