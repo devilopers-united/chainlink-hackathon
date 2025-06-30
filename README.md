@@ -1,5 +1,5 @@
 
-```markdown
+
 # 🧠 AdSpace Protocol
 
 AdSpace is a decentralized on-chain advertising rental protocol that enables publishers to tokenize ad spaces on their websites as NFTs and allows advertisers to rent them transparently using ETH. The system ensures real-time rental pricing using Chainlink oracles and manages availability through smart contracts.
@@ -10,14 +10,14 @@ This project was built as part of the Chainlink Hackathon.
 
 ## 🗂 Project Structure
 
-```
+
 
 chainlink-hackathon/
 ├── adspace/                # Next.js Frontend Application
 ├── adspace-provider/      # NPM SDK package to interact with smart contracts
 └── adspaceContract/       # Forge-based Smart Contracts powered by Chainlink
 
-````
+
 
 ---
 
@@ -53,13 +53,13 @@ A Foundry-based smart contract system that powers the protocol’s core logic:
 - Rental overlap checks to ensure ad slot availability
 
 🔗 **Chainlink Integration:**
-```solidity
+solidity
 AggregatorV3Interface internal priceFeed;
 ...
 function getETHAmountForUSD(...) uses priceFeed.latestRoundData()
-````
 
-📄 [View `PiqselNFT.sol`](./adspaceContract/src/PiqselNFT.sol)
+
+📄 [View `PiqselNFT.sol`](.adspace-smart-contract/src/PiqselNFT.sol)
 
 ---
 
@@ -79,16 +79,16 @@ A reusable JavaScript SDK published to NPM for seamless integration:
 
 **Chainlink Price Feeds** are used to ensure fair ETH pricing for rental durations, making the payment system USD-denominated with real-time exchange rates.
 
-🧠 Oracle Usage in [`PiqselNFT.sol`](./adspaceContract/src/PiqselNFT.sol):
+🧠 Oracle Usage in [`PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol):
 
-```solidity
+solidity
 AggregatorV3Interface internal priceFeed;
 
 function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (uint256) {
     (, int256 price, , , ) = priceFeed.latestRoundData();
     ...
 }
-```
+
 
 ---
 
@@ -120,7 +120,7 @@ function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (
 | `PiqselNFT.sol` | Core NFT logic, rental management, pricing, payments |
 
 🛠 Built with [Foundry](https://book.getfoundry.sh/)
-📍 Source: [`adspaceContract/src/PiqselNFT.sol`](./adspaceContract/src/PiqselNFT.sol)
+📍 Source: [`adspaceContract/src/PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol)
 
 ---
 
@@ -128,7 +128,7 @@ function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (
 
 ### Install Dependencies
 
-```bash
+bash
 # Frontend
 cd adspace
 npm install
@@ -140,22 +140,22 @@ forge install
 # Provider SDK
 cd ../adspace-provider
 npm install
-```
+
 
 ### Run Local Development Server
 
-```bash
+bash
 cd adspace
 npm run dev
-```
+
 
 ### Compile and Deploy Contracts
 
-```bash
+bash
 cd ../adspaceContract
 forge build
 forge deploy
-```
+
 
 ---
 
@@ -179,7 +179,7 @@ forge deploy
 
 ## 👨‍💻 Authors
 
-* **Shorya Baj** — [GitHub](https://github.com/bajshorya)
+* **Shorya Baj** — [GitHub](https://github.com/rahulsahani1137)
 
 ---
 
@@ -204,7 +204,7 @@ MIT License. See [`LICENSE`](./LICENSE) for details.
 
 ## ⭐️ Show your support
 
-If you like this project, give it a star ⭐️ on [GitHub](https://github.com/bajshorya/chainlink-hackathon)!
+If you like this project, give it a star ⭐️ on [GitHub](https://github.com/rahulsahani1137/chainlink-hackathon.git)!
 
-```
+
 
