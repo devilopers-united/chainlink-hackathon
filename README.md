@@ -2,7 +2,7 @@
 
 # 🧠 AdSpace Protocol
 
-AdSpace is a decentralized on-chain advertising rental protocol that enables publishers to tokenize ad spaces on their websites as NFTs and allows advertisers to rent them transparently using ETH. The system ensures real-time rental pricing using Chainlink oracles and manages availability through smart contracts.
+AdSpace is a decentralized on-chain advertising protocol that enables publishers to tokenize ad spaces on their websites as NFTs and allows advertisers to rent them transparently using ETH. The system ensures real-time rental pricing using Chainlink oracles and manages availability through smart contracts.
 
 This project was built as part of the Chainlink Hackathon.
 
@@ -180,7 +180,7 @@ forge deploy
 
 ## 👨‍💻 Authors
 
-* **Rahul Sahani/Shorya Baj/Kanak Poddar** — [GitHub]((https://github.com/devilopers-united))
+* **Rahul Sahani / Shorya Baj / Kanak Poddar** — [GitHub]((https://github.com/devilopers-united.git))
 
 ---
 
