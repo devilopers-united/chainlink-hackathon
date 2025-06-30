@@ -174,13 +174,12 @@ forge deploy
 * Dynamic pricing based on views (via Chainlink Functions)
 * Decentralized arbitration for content violations
 * Multi-chain support
-* Integration with decentralized storage for ad creatives
 
 ---
 
 ## 👨‍💻 Authors
 
-* **Rahul Sahani/Shorya Baj/Kanak Poddar** — [GitHub]((https://github.com/devilopers-united/))
+* **Rahul Sahani/Shorya Baj/Kanak Poddar** — [GitHub]((https://github.com/devilopers-united.git))
 
 ---
 
