@@ -53,11 +53,11 @@ A Foundry-based smart contract system that powers the protocol’s core logic:
 - Rental overlap checks to ensure ad slot availability
 
 🔗 **Chainlink Integration:**
-solidity
+```solidity
 AggregatorV3Interface internal priceFeed;
 ...
 function getETHAmountForUSD(...) uses priceFeed.latestRoundData()
-
+```
 
 📄 [View `PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol)
 
@@ -81,7 +81,7 @@ A reusable JavaScript SDK published to NPM for seamless integration:
 
 🧠 Oracle Usage in [`PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol):
 
-solidity
+```solidity
 AggregatorV3Interface internal priceFeed;
 
 function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (uint256) {
@@ -89,7 +89,7 @@ function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (
     ...
 }
 
-
+```
 ---
 
 ## 🪙 How It Works
@@ -123,7 +123,7 @@ function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (
 📍 Source: [`adspaceContract/src/PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol)
 
 ---
-
+```bash
 ## 📚 Developer Guide
 
 ### Install Dependencies
@@ -140,22 +140,22 @@ forge install
 # Provider SDK
 cd ../adspace-provider
 npm install
-
+```
 
 ### Run Local Development Server
 
-bash
+```bash
 cd adspace
 npm run dev
 
-
+```
 ### Compile and Deploy Contracts
 
-bash
+```bash
 cd ../adspaceContract
 forge build
 forge deploy
-
+```
 
 ---
 
