@@ -13,9 +13,10 @@ This project was built as part of the Chainlink Hackathon.
 
 ```
 chainlink-hackathon/
-├── adspace/                # Next.js Frontend Application
-├── adspace-provider/      # NPM SDK package to interact with smart contracts
-└── adspaceContract/       # Forge-based Smart Contracts powered by Chainlink
+├── adspace/                       # Next.js Frontend Application
+├── adspace-smart-contract/        # Forge-based Smart Contracts powered by Chainlink
+└── adspace-provider/              # NPM SDK package to interact with smart contracts
+
 ```
 
 
