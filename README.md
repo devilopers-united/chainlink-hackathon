@@ -35,10 +35,11 @@ A [Next.js](https://nextjs.org/) application responsible for the end-user experi
 **Technologies:**
 - Next.js + React
 - Tailwind CSS
-- Wagmi + Ethers.js
+- Ethers.js
 - IPFS (for ad metadata)
-- Zustand (state management)
-
+- Typescript
+- Solidity
+- Chainlink 
 ---
 
 ### 2. **Smart Contracts - [`adspace-smart-contract`](./adspace-smart-contract)**
@@ -72,7 +73,7 @@ A reusable JavaScript SDK published to NPM for seamless integration:
 * Interact with `PiqselNFT` contract (read/write)
 * Wraps common interactions (renting, minting, querying) in helper functions
 
-📦 This allows other developers to plug AdSpace into their own applications.
+📦 This allows other developers to plug AdSpace into their applications.
 
 ---
 
@@ -121,7 +122,7 @@ function getETHAmountForUSD(uint256 usdAmountIn18Decimals) public view returns (
 | `PiqselNFT.sol` | Core NFT logic, rental management, pricing, payments |
 
 🛠 Built with [Foundry](https://book.getfoundry.sh/)
-📍 Source: [`adspaceContract/src/PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol)
+📍 Source: [`adspace-smart-contract/src/PiqselNFT.sol`](./adspace-smart-contract/src/PiqselNFT.sol)
 
 ---
 ```bash
@@ -135,7 +136,7 @@ cd adspace
 npm install
 
 # Smart Contracts
-cd ../adspaceContract
+cd ../adspace-smart-contract
 forge install
 
 # Provider SDK
