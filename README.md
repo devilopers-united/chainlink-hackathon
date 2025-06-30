@@ -179,7 +179,7 @@ forge deploy
 
 ## 👨‍💻 Authors
 
-* **Shorya Baj** — [GitHub](https://github.com/rahulsahani1137)
+* **Rahul Sahani/Shorya Baj/Kanak Poddar** — [GitHub]((https://github.com/devilopers-united/))
 
 ---
 
