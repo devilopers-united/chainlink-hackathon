@@ -179,7 +179,7 @@ forge deploy
 
 ## 👨‍💻 Authors
 
-* **Rahul Sahani/Shorya Baj/Kanak Poddar** — [GitHub]((https://github.com/devilopers-united.git))
+* **Rahul Sahani/Shorya Baj/Kanak Poddar** — [GitHub]((https://github.com/devilopers-united))
 
 ---
 
@@ -196,11 +196,6 @@ forge deploy
 
 ---
 
-## 📜 License
-
-MIT License. See [`LICENSE`](./LICENSE) for details.
-
----
 
 ## ⭐️ Show your support
 
